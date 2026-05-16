@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>	
-	<meta name="google-site-verification" content="AZ0X3A--45_UW0gVJFOb4gjOk6C8sbBPQRgH_bDAmso" />
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gyanova Academy | Future-Focused Education</title>
@@ -82,7 +81,9 @@
       }
       .hamburger { 
         display: flex; 
-        position: relative;
+        position: absolute;
+        top: 1rem;
+        right: 5%;
         z-index: 1000;
       }
       .hamburger.active span:nth-child(1) {
@@ -101,6 +102,10 @@
       }
       .logo {
         font-size: 1.2rem;
+      }
+      .hamburger {
+        top: 0.8rem;
+        right: 5%;
       }
     }
     .hero {
@@ -576,9 +581,78 @@ footer {
     transform: translateX(-50%);
   }
 }
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    .popup-overlay.show {
+      display: flex;
+    }
+    .popup-content {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 90%;
+      width: 400px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      animation: popupSlide 0.5s ease-out;
+    }
+    @keyframes popupSlide {
+      from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .popup-content h2 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .popup-content p {
+      color: #555;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    .popup-close-btn {
+      background: var(--gradient);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 15px rgba(58, 134, 255, 0.4);
+    }
+    .popup-close-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(58, 134, 255, 0.6);
+    }
   </style>
 </head>
 <body>
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-content">
+      <h2>🎉 Admission Open for 2026!</h2>
+      <p>Join Gyanova Academy and shape your future with quality education.</p>
+      <button class="popup-close-btn" id="popupCloseBtn">Get Started</button>
+    </div>
+  </div>
   <header>
     <a href class="logo"><i class="fas fa-graduation-cap logo-icon"></i>Gyanova Academy</a>
     <div class="hamburger" id="hamburger">
@@ -633,15 +707,7 @@ footer {
             <li><span>Science</span><span>200/-</span></li>
             
           </ul>
-          <div class="optional-classes">
-            <div class="optional-title">Optional Classes  :</div>
-            <ul class="optional-list">
-			  <li><span> 🗣 Spoken English Class </span><span>₹75 per class</span></li>
-              <li><span> ✅Special Mathematics </span><span>₹75 per class</span></li>
-              
-              
-            </ul>
-          </div>
+          
         </div>
         <div class="program-footer">
           <div class="footer-buttons-container">
@@ -670,14 +736,7 @@ footer {
             <li><span>Geography</span><span>200/-</span></li>
             
           </ul>
-          <div class="optional-classes">
-            <div class="optional-title">Optional Classes  :</div>
-            <ul class="optional-list">
-              <li><span> 🗣 Spoken English Class </span><span>₹75 per class</span></li>
-              <li><span> ✅Special Mathematics </span><span>₹75 per class</span></li>
-              
-            </ul>
-          </div>
+         
         </div>
         <div class="program-footer">
             <div class="footer-buttons-container">
@@ -707,14 +766,7 @@ footer {
             <li><span>Hindi/Sanskrit</span><span>200/-</span></li>
         
           </ul>
-          <div class="optional-classes">
-            <div class="optional-title">Optional Classes  :</div>
-            <ul class="optional-list">
-             <li><span> 🗣 Spoken English Class </span><span>₹75 per class</span></li>
-              <li><span> ✅Special Mathematics </span><span>₹75 per class</span></li>
-              
-            </ul>
-          </div>
+         
         </div>
         <div class="program-footer">
             <div class="footer-buttons-container">
@@ -744,15 +796,7 @@ footer {
             <li><span>Hindi/Sanskrit</span><span>200/-</span></li>
            
           </ul>
-          <div class="optional-classes">
-            <div class="optional-title">Optional Classes  :</div>
-            <ul class="optional-list">
-              <li><span> 🗣 Spoken English Class </span><span>₹75 per class</span></li>
-              <li><span> ✅Special Mathematics </span><span>₹75 per class</span></li>
-              
-            </ul>
-          </div>
-        </div>
+                </div>
         <div class="program-footer">
             <div class="footer-buttons-container">
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSft07bDnJXsSQXYfyWPf9vxjVHL0nLnZaJDGV-Dz-n31Q6oEA/viewform?usp=sharing&ouid=103723941772251480448" class="program-link">Admission form</a>
@@ -780,13 +824,7 @@ footer {
             <li><span>History</span><span>250/-</span></li>
             <li><span>Geography</span><span>250/-</span></li>
           </ul>
-          <div class="optional-classes">
-            <div class="optional-title">Optional Classes  :</div>
-            <ul class="optional-list">
-             <li><span> 🗣 Spl Grammer Class </span><span>₹75 per class</span></li>
-              <li><span> ✅Special Mathematics </span><span>₹75 per class</span></li>
-                          </ul>
-          </div>
+         
         </div>
         <div class="program-footer">
             <div class="footer-buttons-container">
@@ -815,14 +853,7 @@ footer {
             <li><span>History</span><span>250/-</span></li>
             <li><span>Geography</span><span>250/-</span></li>
           </ul>
-          <div class="optional-classes">
-            <div class="optional-title">Optional Classes  :</div>
-            <ul class="optional-list">
-             <li><span> 🗣 Spl Grammer Class </span><span>₹75 per class</span></li>
-              <li><span> ✅Special Mathematics </span><span>₹75 per class</span></li>
-              
-            </ul>
-          </div>
+         
         </div>
         <div class="program-footer">
             <div class="footer-buttons-container">
@@ -852,14 +883,7 @@ footer {
             
     
           </ul>
-          <div class="optional-classes">
-            <div class="optional-title">Optional Classes  :</div>
-            <ul class="optional-list">
-              <li><span> 🗣 Spoken English Class </span><span>₹75 per class</span></li>
-              <li><span> ✅Special Mathematics </span><span>₹75 per class</span></li>
-              
-            </ul>
-          </div>
+         
         </div>
         <div class="program-footer">
             <div class="footer-buttons-container">
@@ -889,14 +913,7 @@ footer {
             
           </ul>
 
-          <div class="optional-classes">
-            <div class="optional-title">Optional Classes  :</div>
-            <ul class="optional-list">
-              <li><span> 🗣 Spoken English Class </span><span>₹75 per class</span></li>
-              <li><span> ✅Special Mathematics </span><span>₹75 per class</span></li>
-              
-            </ul>
-          </div>
+          
         </div>
         <div class="program-footer">
             <div class="footer-buttons-container">
@@ -960,11 +977,11 @@ footer {
       <div class="contact-info">
         
         <p><i class="fas fa-map-marker-alt"></i> 16 Feet Road, Boardghar, Jugberia, Kolkata</p>
-        <p><i class="fas fa-map-marker-alt"></i> Bireshpally,30 Bus Stand,Madhyamgram,Kolkata </p>
+        <p><i class="fas fa-map-marker-alt"></i> 30 Bus Stand,Madhyamgram,Kolkata </p>
        
         
         <p><i class="fas fa-phone"></i> +91 91636 21264</p>
-        <p><i class="fas fa-phone"></i> +91 94339 12408</p>
+        <p><i class="fas fa-phone"></i> +91 93302 33178</p>
         <p><i class="fas fa-envelope"></i> gyanova07@gmail.com</p>
       </div>
     </div>
@@ -1004,6 +1021,35 @@ footer {
           nav.classList.remove('active');
         }
       });
+    });
+
+    // Popup functionality for first-time visitors
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupCloseBtn = document.getElementById('popupCloseBtn');
+
+    // Check if user has visited before
+    const hasVisited = localStorage.getItem('gyanovaVisited');
+
+    if (!hasVisited) {
+      // Show popup after a short delay
+      setTimeout(() => {
+        popupOverlay.classList.add('show');
+      }, 1000);
+    }
+
+    // Close popup when button is clicked
+    popupCloseBtn.addEventListener('click', () => {
+      popupOverlay.classList.remove('show');
+      // Mark as visited
+      localStorage.setItem('gyanovaVisited', 'true');
+    });
+
+    // Close popup when clicking outside the content
+    popupOverlay.addEventListener('click', (e) => {
+      if (e.target === popupOverlay) {
+        popupOverlay.classList.remove('show');
+        localStorage.setItem('gyanovaVisited', 'true');
+      }
     });
   </script>
 </body>
