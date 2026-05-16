@@ -648,7 +648,7 @@ footer {
 <body>
   <div class="popup-overlay" id="popupOverlay">
     <div class="popup-content">
-      <h2>🎉 Admission Open for 2026!</h2>
+      <h2>🎉 Admission Open for 2026🎉</h2>
       <p>Join Gyanova Academy and shape your future with quality education.</p>
       <button class="popup-close-btn" id="popupCloseBtn">Get Started</button>
     </div>
@@ -670,6 +670,7 @@ footer {
 
   <section class="hero" id="home">
     <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
+      
       <h1>Redefining Education for the Future</h1>
 <p><b>"যা বিদ্যা সা বিমুক্তয়ে "</b><br>
       Gyanova Academy -আধুনিক শিক্ষা, বাস্তব অভিজ্ঞতা ও উদ্ভাবনী চিন্তাধারার মাধ্যমে শিক্ষার্থীদের প্রস্তুত করে ভবিষ্যতের জন্য।</p>
@@ -1023,32 +1024,24 @@ footer {
       });
     });
 
-    // Popup functionality for first-time visitors
+    // Popup functionality - shows every time
     const popupOverlay = document.getElementById('popupOverlay');
     const popupCloseBtn = document.getElementById('popupCloseBtn');
 
-    // Check if user has visited before
-    const hasVisited = localStorage.getItem('gyanovaVisited');
-
-    if (!hasVisited) {
-      // Show popup after a short delay
-      setTimeout(() => {
-        popupOverlay.classList.add('show');
-      }, 1000);
-    }
+    // Show popup after a short delay
+    setTimeout(() => {
+      popupOverlay.classList.add('show');
+    }, 1000);
 
     // Close popup when button is clicked
     popupCloseBtn.addEventListener('click', () => {
       popupOverlay.classList.remove('show');
-      // Mark as visited
-      localStorage.setItem('gyanovaVisited', 'true');
     });
 
     // Close popup when clicking outside the content
     popupOverlay.addEventListener('click', (e) => {
       if (e.target === popupOverlay) {
         popupOverlay.classList.remove('show');
-        localStorage.setItem('gyanovaVisited', 'true');
       }
     });
   </script>
