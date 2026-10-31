@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gyanova Academy | Mobile Portal</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Hind+Siliguri:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#091c36',
+              royal: '#0f3160',
+              accentRed: '#c51e23',
+              crimson: '#a3161b',
+              gold: '#f59e0b',
+              goldLight: '#fef3c7',
+              surface: '#f8fafc',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['Cinzel', 'serif'],
+            bengali: ['"Hind Siliguri"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Mobile Scrollbars & Animations */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    * {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    /* Intro splash ambient glow */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.45; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.08); }
+    }
+    .animate-pulse-glow {
+      animation: pulseGlow 5s infinite ease-in-out;
+    }
+
+    /* Professional Intro Typography & Lighting Effects */
+    @keyframes textShine {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .designer-gradient-title {
+      background: linear-gradient(120deg, #ffffff 15%, #ffd277 45%, #ffffff 60%, #f59e0b 85%);
+      background-size: 250% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textShine 4s linear infinite;
+    }
+
+    .designer-welcome-text {
+      background: linear-gradient(135deg, #f8fafc 20%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.35em;
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .typewriter-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background-color: #fbbf24;
+      margin-left: 2px;
+      vertical-align: -0.15em;
+      animation: cursorBlink 0.75s infinite ease-in-out;
+    }
+
+    /* Ultra-smooth cubic-bezier transition classes for intro cross-dissolve */
+    html { scroll-padding-top: 72px; }   /* anchor links stop below the fixed header */
+
+    .intro-phase-layer {
+      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: opacity, transform;
+    }
+
+    /* Bi-directional Infinite Collage Scroller Rows */
+    .dual-collage-row {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: auto;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x pan-y;
+      cursor: grab;
+      user-select: none;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+    .dual-collage-row::-webkit-scrollbar {
+      display: none;
+    }
+    .dual-collage-row:active {
+      cursor: grabbing;
+    }
+    .dual-collage-row img {
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    /* 3-line clamp for review text */
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 font-sans text-slate-800 antialiased selection:bg-brand-gold selection:text-brand-navy pb-24">
+
+  <!-- ==============================================
+       1. CINEMATIC WELCOME & INTRO OVERLAY
+  ============================================== -->
+  <div id="introSplash" class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-[#061224] via-[#091c36] to-[#040b17] text-white px-6 transition-opacity duration-1000 overflow-hidden select-none">
+    
+    <!-- Ambient Studio Light Cones & Floating Aura -->
+    <div class="absolute -top-32 -left-20 w-80 h-80 bg-blue-600/25 rounded-full blur-[100px] pointer-events-none animate-pulse-glow"></div>
+    <div class="absolute -bottom-32 -right-20 w-80 h-80 bg-brand-accentRed/30 rounded-full blur-[110px] pointer-events-none animate-pulse-glow"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+
+    <!-- Content Showcase Container (Stacking layers for seamless cross-dissolve) -->
+    <div class="relative z-10 w-full max-w-sm flex items-center justify-center min-h-[300px]">
+
+      <!-- PHASE 1: Designer 'Welcome' Reveal -->
+      <div id="phaseWelcome" class="intro-phase-layer absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 scale-95 pointer-events-none">
+        <!-- Floating Crest Icon -->
+        <div class="relative mx-auto w-20 h-20 mb-5 flex items-center justify-center">
+          <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-brand-accentRed via-amber-500 to-amber-300 blur-md opacity-70 animate-pulse"></div>
+          <div class="relative w-full h-full rounded-2xl bg-gradient-to-tr from-brand-navy via-slate-900 to-brand-royal border border-amber-400/40 shadow-2xl flex items-center justify-center">
+            <i class="fa-solid fa-graduation-cap text-3xl text-amber-400"></i>
+          </div>
+        </div>
+
+        <p class="text-xs font-semibold uppercase tracking-[0.4em] text-amber-400/90 mb-2">Greetings</p>
+        <h2 class="text-4xl font-extrabold designer-welcome-text uppercase tracking-[0.3em] drop-shadow-lg">
+          WELCOME
+        </h2>
+        <div class="w-12 h-0.5 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mt-4 opacity-75"></div>
+      </div>
+
+      <!-- PHASE 2 & 3: Designer 'GYANOVA ACADEMY' + Typewriter Bengali Slogan in Quotes -->
+      <div id="phaseBrand" class="intro-phase-layer absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 scale-95 pointer-events-none">
+        
+        <!-- Luxury Main Brand Name: Gyanova Academy -->
+        <h1 class="text-4xl sm:text-5xl font-black tracking-tight leading-none uppercase drop-shadow-2xl">
+          <span class="designer-gradient-title">GYANOVA</span>
+        </h1>
+        <h2 class="text-xl sm:text-2xl font-black tracking-[0.35em] text-amber-400 font-serif uppercase mt-1 drop-shadow">
+          ACADEMY
+        </h2>
+
+        <!-- Elegant Filigree Divider -->
+        <div class="flex items-center justify-center gap-2 w-48 my-3.5 opacity-80">
+          <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-amber-400 to-amber-200"></div>
+          <i class="fa-solid fa-om text-[10px] text-amber-400"></i>
+          <div class="h-[1px] flex-1 bg-gradient-to-l from-transparent via-amber-400 to-amber-200"></div>
+        </div>
+
+        <!-- Typewriter Slogan in Bengali wrapped in quotation marks -->
+        <div class="min-h-[32px] flex items-center justify-center">
+          <p class="font-bengali text-lg sm:text-xl font-bold text-amber-200/95 tracking-wide leading-normal">
+            <span>“</span><span id="bengaliTypewriter"></span><span id="typewriterCursor" class="typewriter-cursor"></span><span id="closingQuote" class="opacity-0 transition-opacity duration-300">”</span>
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile Frame Container to ensure unified auto-adjusting fit across all screen sizes -->
+  <div class="max-w-md mx-auto min-h-screen bg-slate-100 relative shadow-2xl overflow-x-hidden pb-24">
+
+  <!-- ==============================================
+       2. MOBILE HEADER & NAVIGATION (CALL ICON REMOVED)
+  ============================================== -->
+  <header id="siteHeader" class="fixed top-0 left-1/2 -translate-x-1/2 z-40 bg-brand-navy/95 backdrop-blur-md border-b border-white/10 px-4 py-3 shadow-md w-full max-w-md">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-accentRed to-amber-500 flex items-center justify-center text-white shadow-md shadow-brand-accentRed/30">
+          <i class="fa-solid fa-book-open-reader text-sm"></i>
+        </div>
+        <div>
+          <div class="flex items-baseline gap-1">
+            <span class="text-base font-extrabold text-white tracking-tight leading-none"></span>
+            <span class="text-[10px] font-bold text-brand-gold uppercase tracking-wider"></span>
+          </div>
+          <p class="text-[9px] text-slate-300 font-bengali"></p>
+        </div>
+      </div>
+      
+      <!-- Hamburger Menu Only (Call Icon removed as requested) -->
+      <div class="flex items-center gap-2">
+        <button onclick="openAdmin()" class="p-2 w-8 h-8 rounded-full bg-amber-400/20 text-amber-300 flex items-center justify-center text-xs active:scale-95 transition" aria-label="Admin login" title="Admin">
+          <i class="fa-solid fa-user-shield"></i>
+        </button>
+        <button onclick="toggleMobileMenu()" class="p-2 w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center text-xs active:scale-95 transition" aria-label="Toggle navigation menu">
+          <i id="menuIcon" class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible Quick Nav Menu -->
+    <nav id="mobileNavMenu" class="hidden pt-3 pb-2 border-t border-white/10 mt-2 flex flex-col gap-2 text-xs text-slate-200">
+            <a href="#courses" onclick="toggleMobileMenu()" class="py-1 px-2 rounded hover:bg-white/5 flex items-center justify-between">
+        <span>Classes & Batches</span> <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+      </a>
+      <a href="#guardians" onclick="toggleMobileMenu()" class="py-1 px-2 rounded hover:bg-white/5 flex items-center justify-between">
+        <span>Message for Guardians</span> <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+      </a>
+      <a href="#gallery" onclick="toggleMobileMenu()" class="py-1 px-2 rounded hover:bg-white/5 flex items-center justify-between">
+        <span>Campus Tour & Highlights</span> <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+      </a>
+      <a href="#reviews" onclick="toggleMobileMenu()" class="py-1 px-2 rounded hover:bg-white/5 flex items-center justify-between">
+        <span>Student & Guardian Reviews</span> <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+      </a>
+      <a href="#contact" onclick="toggleMobileMenu()" class="py-1 px-2 rounded hover:bg-white/5 flex items-center justify-between">
+        <span>Center Location & Contact</span> <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+      </a>
+    </nav>
+  </header>
+  <!-- keeps page content from hiding under the fixed header -->
+  <div id="headerSpacer" class="h-[61px]"></div>
+
+  <!-- ==============================================
+       3. HERO BANNER & ADMISSION ALERT
+  ============================================== -->
+  <section class="bg-gradient-to-b from-brand-navy via-brand-royal to-slate-900 text-white pt-6 pb-8 px-4 rounded-b-[2rem] shadow-xl relative overflow-hidden">
+    <!-- Background Patterns -->
+    <div class="absolute top-0 right-0 -mr-12 -mt-12 w-48 h-48 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 -ml-12 -mb-12 w-48 h-48 bg-brand-accentRed/20 rounded-full blur-2xl pointer-events-none"></div>
+
+    <!-- Sanskrit Motto Banner -->
+    <div class="text-center mb-3">
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur border border-amber-400/30 text-amber-300 text-xs font-bengali font-semibold shadow-inner">
+        <span>✦</span> “সা বিদ্যা যা বিমুক্তয়ে” <span>✦</span>
+      </span>
+    </div>
+
+    <!-- Main Title & Tagline -->
+    <div class="text-center">
+      <h1 class="text-3xl font-extrabold tracking-tight leading-tight">
+        GYANOVA <span class="text-amber-400">ACADEMY</span>
+      </h1>
+      <p class="text-xs uppercase tracking-widest text-slate-300 font-semibold mt-1">
+        Empowering Students for Academic Excellence
+      </p>
+    </div>
+
+    <!-- Board Affiliations Badge -->
+    <div class="grid grid-cols-2 gap-2 mt-4 max-w-sm mx-auto">
+      <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-xl p-2.5 flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-amber-400/20 text-amber-300 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-landmark text-sm"></i>
+        </div>
+        <div>
+          <span class="text-[9px] text-slate-300 block leading-tight font-medium">Secondary Board</span>
+          <span class="text-[11px] font-bold text-white leading-tight">WBBSE <br>(Class 5-10) </span>
+          
+        </div>
+      </div>
+
+      <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-xl p-2.5 flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-brand-accentRed/30 text-red-300 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-graduation-cap text-sm"></i>
+        </div>
+        <div>
+          <span class="text-[9px] text-slate-300 block leading-tight font-medium">Higher Secondary</span>
+          <span class="text-[11px] font-bold text-white leading-tight">WBCHSE <br>(Class 11 & 12)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admissions Open Banner Tag -->
+    <div class="mt-5 bg-gradient-to-r from-brand-accentRed via-red-600 to-amber-600 p-0.5 rounded-2xl shadow-lg shadow-red-900/40 animate-pulse">
+      <div class="bg-brand-navy/95 rounded-[14px] p-3 text-center">
+        <div class="flex items-center justify-center gap-2">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+          </span>
+          <span class="text-sm font-extrabold tracking-wider text-amber-400 uppercase">ADMISSIONS OPEN</span>
+        </div>
+        <p class="text-[11px] text-slate-200 mt-0.5 font-medium">New Batches Starting Soon • <span class="text-amber-300 font-bold">Limited Seats Available!</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       4. COURSES OFFERED (CLASSES 5-10 & 11-12)
+  ============================================== -->
+  <section id="courses" class="px-4 -mt-4 relative z-20">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      
+      <!-- Card 1: Classes 5 to 10 with Subject List -->
+      <div class="bg-white rounded-2xl p-4 shadow-md border-t-4 border-brand-royal flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute -right-3 -top-3 w-16 h-16 bg-blue-50 rounded-full -z-0"></div>
+        <div class="relative z-10">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="inline-block px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wide bg-blue-100 text-brand-royal rounded-md">
+              Secondary Foundation
+            </span>
+            <span class="text-[10px] font-bold text-slate-400">WBBSE Curriculum</span>
+          </div>
+          <h3 class="text-xl font-black text-slate-900 leading-tight">
+            CLASSES <span class="text-brand-royal text-2xl font-extrabold">5 to 10</span>
+          </h3>
+          
+          <div class="mt-2.5">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-1.5 flex items-center gap-1">
+              <i class="fa-solid fa-book-open text-brand-royal text-[10px]"></i> Subjects Taught:
+            </span>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-900 text-[11px] font-semibold border border-blue-100">Bengali</span>
+              <span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-900 text-[11px] font-semibold border border-blue-100">English</span>
+              <span class="px-2 py-0.5 rounded-md bg-amber-50 text-amber-900 text-[11px] font-bold border border-amber-200">Mathematics</span>
+              <span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-900 text-[11px] font-semibold border border-blue-100">Physical Science</span>
+              <span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-900 text-[11px] font-semibold border border-blue-100">Life Science</span>
+              <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold">History</span>
+              <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold">Geography</span>
+            </div>
+          </div>
+          <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">
+            Special chapter-wise mock tests, personal attention, and foundation grooming for Madhyamik.
+          </p>
+        </div>
+        <button onclick="openInquiryModal('5-10')" class="mt-3.5 w-full py-2 px-3 bg-brand-royal text-white rounded-xl text-xs font-bold active:scale-95 transition flex items-center justify-center gap-1.5 shadow">
+          <span>Inquire for Class 5 – 10</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
+      </div>
+
+      <!-- Card 2: Classes 11 & 12 with Subject List -->
+      <div class="bg-white rounded-2xl p-4 shadow-md border-t-4 border-brand-accentRed flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute -right-3 -top-3 w-16 h-16 bg-red-50 rounded-full -z-0"></div>
+        <div class="relative z-10">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="inline-block px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wide bg-red-100 text-brand-accentRed rounded-md">
+              Higher Secondary
+            </span>
+            <span class="text-[10px] font-bold text-slate-400">WBCHSE Board</span>
+          </div>
+          <h3 class="text-xl font-black text-slate-900 leading-tight">
+            CLASSES <span class="text-brand-accentRed text-2xl font-extrabold">11 & 12</span>
+          </h3>
+
+          <div class="mt-2.5">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-1.5 flex items-center gap-1">
+              <i class="fa-solid fa-graduation-cap text-brand-accentRed text-[10px]"></i> Subjects Taught:
+            </span>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded-md bg-red-50 text-red-900 text-[11px] font-semibold border border-red-100">English</span>
+              <span class="px-2 py-0.5 rounded-md bg-red-50 text-red-900 text-[11px] font-semibold border border-red-100">Bengali</span>
+              <span class="px-2 py-0.5 rounded-md bg-purple-50 text-purple-900 text-[11px] font-bold border border-purple-200">Political Science</span>
+              <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold">History</span>
+              <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold">Philosophy</span>
+              <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold">Education</span>
+              <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-900 text-[11px] font-semibold border border-emerald-100">Accountancy</span>
+              <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-900 text-[11px] font-semibold border border-emerald-100">Business Studies</span>
+              <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-900 text-[11px] font-semibold border border-emerald-100">Economics</span>
+            </div>
+          </div>
+          <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">
+            In-depth analytical coaching with previous year question solutions and score enhancement.
+          </p>
+        </div>
+        <button onclick="openInquiryModal('11-12')" class="mt-3.5 w-full py-2 px-3 bg-brand-accentRed text-white rounded-xl text-xs font-bold active:scale-95 transition flex items-center justify-center gap-1.5 shadow">
+          <span>Inquire for Class 11 – 12</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==============================================
+       5. 5 CORE PILLARS FROM FLYER
+  ============================================== -->
+  <section class="px-4 mt-6">
+    <div class="text-center mb-3">
+      <h2 class="text-xs uppercase font-extrabold tracking-widest text-brand-accentRed">Why Choose Gyanova</h2>
+      <p class="text-lg font-extrabold text-slate-800">Our Key Teaching Pillars</p>
+    </div>
+
+    <!-- Scrolling/Compact Grid of 5 Features from flyer -->
+    <div class="grid grid-cols-2 gap-2.5">
+      <!-- Feature 1 -->
+      <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-200/80 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 text-base">
+          <i class="fa-solid fa-clipboard-check"></i>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-800 leading-tight">Monthly Exam</h4>
+          <p class="text-[10px] text-slate-500">Regular assessment</p>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-200/80 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 text-base">
+          <i class="fa-solid fa-desktop"></i>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-800 leading-tight">Computer Studies</h4>
+          <p class="text-[10px] text-slate-500">Digital literacy & skills</p>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-200/80 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 text-base">
+          <i class="fa-solid fa-chalkboard-user"></i>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-800 leading-tight">Experienced Faculty</h4>
+          <p class="text-[10px] text-slate-500">Board exam specialists</p>
+        </div>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="bg-white p-3 rounded-2xl shadow-sm border border-slate-200/80 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0 text-base">
+          <i class="fa-solid fa-user-check"></i>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold text-slate-800 leading-tight">Personal Attention</h4>
+          <p class="text-[10px] text-slate-500">Small batch care</p>
+        </div>
+      </div>
+
+      <!-- Feature 5 (Spanning 2 columns for symmetry) -->
+      <div class="col-span-2 bg-gradient-to-r from-amber-50 to-orange-50 p-3 rounded-2xl border border-amber-200 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 text-base shadow-sm">
+          <i class="fa-regular fa-lightbulb"></i>
+        </div>
+        <div class="flex-1">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold text-slate-900 leading-tight">Doubt Clearing Sessions</h4>
+            <span class="text-[9px] bg-amber-200 text-amber-900 font-bold px-1.5 py-0.5 rounded">Free</span>
+          </div>
+          <p class="text-[10px] text-slate-600 mt-0.5">Extra dedicated hours so no student is left behind.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       6. GUARDIAN / PARENT TRUST CORNER (POSTER TEXT)
+  ============================================== -->
+  <section id="guardians" class="px-4 mt-8">
+    <div class="bg-gradient-to-br from-slate-900 via-brand-navy to-slate-900 rounded-3xl p-5 text-white shadow-xl relative overflow-hidden">
+      <!-- Decorative element -->
+      <div class="absolute -right-10 -bottom-10 w-36 h-36 bg-amber-500/10 rounded-full blur-xl pointer-events-none"></div>
+
+      <div class="flex items-center gap-2 mb-3">
+        <span class="w-7 h-7 rounded-lg bg-amber-400 text-brand-navy flex items-center justify-center text-xs font-bold">
+          <i class="fa-solid fa-hand-holding-heart"></i>
+        </span>
+        <div>
+          <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wider block">Guardian Commitment</span>
+          <h3 class="text-base font-extrabold text-white">অভিভাবকদের উদ্দেশ্যে আমাদের বার্তা</h3>
+        </div>
+      </div>
+
+      <p class="text-[11px] text-slate-300 mb-4 leading-relaxed">
+        We ensure every parent feels confident about their child's holistic progress, academic discipline, and future milestones.
+      </p>
+
+      <!-- Bengali Points directly extracted from the poster -->
+      <div class="space-y-3 font-bengali">
+        
+        <!-- Point 1 -->
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/10 flex items-start gap-2.5">
+          <span class="text-amber-400 text-sm mt-0.5">✦</span>
+          <div>
+            <h4 class="text-xs font-bold text-amber-300">সুপ্ত মেধা ও সৃজনশীলতার বিকাশ</h4>
+            <p class="text-xs text-slate-200 leading-relaxed mt-1">
+              উন্নত শিক্ষণ পদ্ধতি ও ধারাবাহিক মূল্যায়নের মাধ্যমে শিক্ষার্থীদের সুপ্ত মেধা ও সৃজনশীলতার বিকাশ ঘটাতে এবং তাদের প্রাতিষ্ঠানিক উৎকর্ষ নিশ্চিতকরণের পাশাপাশি একটি সুদৃঢ় শিক্ষাগত ভিত্তি তৈরিতে সম্পূর্ণ প্রতিশ্রুতিবদ্ধ।
+            </p>
+          </div>
+        </div>
+
+        <!-- Point 2 -->
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/10 flex items-start gap-2.5">
+          <span class="text-amber-400 text-sm mt-0.5">✦</span>
+          <div>
+            <h4 class="text-xs font-bold text-amber-300">অভিজ্ঞ শিক্ষক মণ্ডলী</h4>
+            <p class="text-xs text-slate-200 leading-relaxed mt-1">
+              আমাদের এখানে অভিজ্ঞ শিক্ষক মণ্ডলীর তত্ত্বাবধানে ষষ্ঠ থেকে দ্বাদশ শ্রেণী পর্যন্ত সমস্ত বিষয়ের যত্নসহকারে পঠন-পাঠন করানো হয়।
+            </p>
+          </div>
+        </div>
+
+        <!-- Point 3 -->
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/10 flex items-start gap-2.5">
+          <span class="text-amber-400 text-sm mt-0.5">✦</span>
+          <div>
+            <h4 class="text-xs font-bold text-amber-300">নিয়মিত পরীক্ষা ও বিশেষ যত্ন</h4>
+            <p class="text-xs text-slate-200 leading-relaxed mt-1">
+              ছাত্র-ছাত্রীদের উজ্জ্বল ভবিষ্যৎ গড়ে তুলতে আমরা নিয়মিত পরীক্ষা এবং প্রতিটি শিক্ষার্থীর প্রতি বিশেষ মনোযোগ দিয়ে থাকি।
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       7. HORIZONTAL SLOW-MOTION & MANUAL COLLAGE GALLERY (MATCHING IMAGE 1)
+  ============================================== -->
+  <section id="gallery" class="mt-8">
+    <div class="px-4 mb-3">
+      <h2 class="text-xs uppercase font-extrabold tracking-widest text-brand-accentRed">Campus Gallery</h2>
+      <p class="text-lg font-extrabold text-slate-800">Institute Life & Activities</p>
+    </div>
+
+    <p id="galleryEmpty" class="px-4 py-6 text-xs text-slate-500 text-center">Loading photos…</p>
+
+    <!-- Photos come from the Google Drive folder "institute img" -->
+    <div class="flex flex-col gap-2.5 overflow-hidden">
+      <div id="collageRow1" class="dual-collage-row px-4 py-0.5 hidden">
+        <div id="trackRow1" class="flex items-center gap-2.5 shrink-0 w-max"></div>
+      </div>
+      <div id="collageRow2" class="dual-collage-row px-4 py-0.5 hidden">
+        <div id="trackRow2" class="flex items-center gap-2.5 shrink-0 w-max"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Image Lightbox Modal -->
+  <div id="imageLightboxModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4 hidden transition-opacity">
+    <button onclick="closeLightbox()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/20 text-white flex items-center justify-center text-sm z-20 hover:bg-white/30">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="max-w-md w-full bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+      <div class="relative w-full h-72 bg-black flex items-center justify-center">
+        <img id="lightboxImg" src="" alt="Institute Photo" class="max-h-full max-w-full object-contain">
+      </div>
+      <div class="p-4 bg-slate-900 text-white">
+        <span id="lightboxTag" class="text-[9px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">Tag</span>
+        <h3 id="lightboxTitle" class="text-sm font-bold mt-1 text-white">Title</h3>
+        <p id="lightboxDesc" class="text-xs text-slate-300 mt-0.5 leading-snug">Description</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================
+       8. STUDENT & PARENT REVIEWS (PAGINATED 3 PER SCREEN WITH SWIPE & BUBBLES)
+  ============================================== -->
+  <section id="reviews" class="px-4 mt-8">
+    <div class="flex items-center justify-between mb-3">
+      <div>
+        <h2 class="text-xs uppercase font-extrabold tracking-widest text-brand-accentRed">Real Testimonials</h2>
+        <p class="text-lg font-extrabold text-slate-800">Student & Guardian Reviews</p>
+      </div>
+      <button onclick="toggleReviewModal()" class="text-xs bg-brand-royal text-white font-bold px-3 py-1.5 rounded-xl shadow active:scale-95 transition flex items-center gap-1">
+        <i class="fa-solid fa-pen-to-square text-[10px]"></i> Add Review
+      </button>
+    </div>
+
+    <!-- Rating Summary Badge -->
+    <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-200/80 mb-3 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="text-2xl font-black text-slate-900 leading-none">4.9</div>
+        <div>
+          <div class="flex text-amber-400 text-xs">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star-half-stroke"></i>
+          </div>
+          <span class="text-[10px] text-slate-500 font-medium">Over 150+ Happy Students & Parents</span>
+        </div>
+      </div>
+      <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-lg border border-emerald-200">
+        100% Verified
+      </span>
+    </div>
+
+    <!-- Paginated Reviews Carousel Container (Swipeable 3 cards per screen) -->
+    <div class="relative overflow-hidden rounded-2xl">
+      <div id="reviewsPagesTrack" class="flex transition-transform duration-500 ease-out will-change-transform" style="transform: translateX(0%);">
+        <!-- Rendered dynamically in chunks of 3 reviews per page -->
+      </div>
+    </div>
+
+    <!-- Review Full Text Focus / Blur Modal Overlay -->
+    <div id="reviewFocusModal" onclick="closeReviewFocusModal(event)" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden transition-opacity">
+      <div id="reviewFocusCard" class="bg-white rounded-2xl p-5 shadow-2xl max-w-sm w-full border border-slate-200 transition-all transform scale-95" onclick="event.stopPropagation()">
+        <div class="flex items-start justify-between pb-3 border-b border-slate-100">
+          <div class="flex items-center gap-2.5">
+            <div id="focusAvatar" class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
+              U
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <h4 id="focusName" class="text-xs font-extrabold text-slate-900">Name</h4>
+                <span id="focusRoleBadge" class="text-[9px] px-1.5 py-0.2 rounded font-semibold">Role</span>
+              </div>
+              <p id="focusBatch" class="text-[10px] text-slate-500 font-medium">Batch</p>
+            </div>
+          </div>
+          <div id="focusStars" class="flex text-amber-400 text-xs"></div>
+        </div>
+
+        <div class="mt-3 bg-slate-50 p-3 rounded-xl border border-slate-100/90 max-h-60 overflow-y-auto">
+          <p id="focusComment" class="text-xs text-slate-700 leading-relaxed font-normal whitespace-pre-line"></p>
+        </div>
+
+        <button onclick="closeReviewFocusModal()" class="mt-4 w-full py-2 bg-slate-900 text-white rounded-xl text-xs font-bold active:scale-98 transition shadow">
+          Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Dynamic Pagination Bubbles / Dots & Swipe Hint -->
+    <div id="reviewsPaginationContainer" class="flex flex-col items-center justify-center gap-2 mt-3.5">
+      <div id="reviewsBubbles" class="flex items-center justify-center gap-1.5">
+        <!-- Dots injected dynamically based on total pages -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       9. RESTORED PREMIUM CENTER CAROUSEL & LOCATION SECTION
+       (Clean layout with Quick Switch Tabs + Direct "View on Map" links)
+  ============================================== -->
+  <section id="contact" class="px-4 mt-8">
+    <div class="bg-white rounded-3xl p-5 shadow-md border border-slate-200/80">
+      <div class="text-center mb-4">
+        <span class="text-xs font-bold text-brand-accentRed uppercase tracking-wider">Our Learning Centers</span>
+        <h3 class="text-xl font-extrabold text-slate-900">Visit Gyanova Academy</h3>
+       
+      </div>
+
+      <!-- Center Auto-Swipeable Carousel Section (Matching Image Layout) -->
+      <div class="rounded-2xl border border-slate-200/80 bg-slate-100/70 p-2 sm:p-2.5">
+        
+        <!-- Center Quick Switch Tabs (Matched to Image) -->
+        <div class="grid grid-cols-2 gap-1.5 p-1 mb-2.5 bg-slate-200/60 rounded-xl text-xs font-bold">
+          <button id="centerTab0" onclick="switchCenterSlide(0)" class="py-2.5 px-2 rounded-xl bg-[#091c36] text-white shadow-sm transition-all flex items-center justify-center gap-1.5 text-center leading-tight">
+            <i class="fa-solid fa-location-dot text-amber-400 text-xs shrink-0"></i>
+            <span class="text-[11px] font-bold">Center 1<br>(Boardghar)</span>
+          </button>
+          <button id="centerTab1" onclick="switchCenterSlide(1)" class="py-2.5 px-2 rounded-xl text-slate-700 hover:text-slate-900 transition-all flex items-center justify-center gap-1.5 text-center leading-tight">
+            <i class="fa-solid fa-train text-blue-600 text-xs shrink-0"></i>
+            <span class="text-[11px] font-semibold">Center 2<br>(Madhyamgram)</span>
+          </button>
+        </div>
+
+        <!-- Carousel Track with Smooth Swipe & Slide Transition -->
+        <div class="overflow-hidden rounded-2xl">
+          <div id="centersCarouselTrack" class="flex transition-transform duration-500 ease-out" style="transform: translateX(0%);">
+            
+            <!-- Slide 1: Center 1 (Boardghar Campus) -->
+            <div class="w-full shrink-0 p-4 bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+              <div>
+                <!-- Top Status Row -->
+                <div class="flex items-center justify-between gap-2 mb-2.5">
+                  <span class="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-lg bg-red-50 text-brand-crimson border border-red-200/80 shadow-2xs">
+                    <i class="fa-solid fa-star text-[10px] text-amber-500"></i> Main Campus 
+                  </span>
+                </div>
+
+                <!-- Center Name & Address -->
+                <h4 class="text-base font-extrabold text-slate-900 leading-snug tracking-tight">
+                  Center 1: Boardghar
+                </h4>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                  16 Feet Road, Boardghar, Jugberia
+                </p>
+
+                <!-- Transit Chip -->
+                
+              </div>
+
+              <!-- Bottom Action Row: Landmark + Direct View in Map Button -->
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
+                <span class="text-xs text-slate-600 font-medium leading-tight">
+                  View on Maps
+                </span>
+                <a href="https://maps.google.com/?cid=7984029313011556810&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#0d346b] to-[#1d4ed8] hover:from-[#091c36] hover:to-[#1e40af] text-white font-bold text-xs shadow-md shadow-blue-900/20 active:scale-95 transition shrink-0">
+                  <i class="fa-solid fa-map-location-dot text-amber-300 text-xs"></i>
+                  <span>View in Map</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-blue-200"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Slide 2: Center 2 (Madhyamgram Station Road) -->
+            <div class="w-full shrink-0 p-4 bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+              <div>
+                <!-- Top Status Row -->
+                <div class="flex items-center justify-between gap-2 mb-2.5">
+                  <span class="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-lg bg-blue-50 text-blue-800 border border-blue-200/80 shadow-2xs">
+                    <i class="fa-solid fa-building-columns text-[10px] text-blue-600"></i> Annex Campus
+                  </span>
+                </div>
+
+                <!-- Center Name & Address -->
+                <h4 class="text-base font-extrabold text-slate-900 leading-snug tracking-tight">
+                  Center 2: Madhyamgram Station Road
+                </h4>
+                <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                  Near Madhyamgram Railway Station, 30 Bus Stand, Bireshpally, Madhyamgram, Kolkata - 700129.     
+            </p>
+
+                <!-- Transit Chip -->
+                              </div>
+
+              <!-- Bottom Action Row: Landmark + Direct View in Map Button -->
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
+                <span class="text-xs text-slate-600 font-medium leading-tight">
+                  View on Maps
+                </span>
+                <a href="https://maps.google.com/?cid=11351236493843373876&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#0d346b] to-[#1d4ed8] hover:from-[#091c36] hover:to-[#1e40af] text-white font-bold text-xs shadow-md shadow-blue-900/20 active:scale-95 transition shrink-0">
+                  <i class="fa-solid fa-map-location-dot text-amber-300 text-xs"></i>
+                  <span>View in Map</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-blue-200"></i>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Direct Phone Numbers from poster -->
+      <div class="grid grid-cols-1 gap-2.5 mt-3.5">
+        <a href="tel:+919163621264" class="flex items-center justify-between p-3 rounded-xl bg-blue-50 border border-blue-200 text-blue-950 active:scale-95 transition">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center text-xs">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div>
+              <span class="text-[10px] text-blue-700 block font-medium">Primary Admission Desk</span>
+              <span class="text-xs font-bold">+91 91636 21264</span>
+            </div>
+          </div>
+          <span class="text-[10px] bg-blue-600 text-white font-bold px-2.5 py-1 rounded-md">Call</span>
+        </a>
+
+        <a href="tel:+919330233178" class="flex items-center justify-between p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 active:scale-95 transition">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-amber-600 text-white flex items-center justify-center text-xs">
+              <i class="fa-solid fa-phone-volume"></i>
+            </div>
+            <div>
+              <span class="text-[10px] text-amber-700 block font-medium">Helpline & Guardian Support</span>
+              <span class="text-xs font-bold">+91 93302 33178</span>
+            </div>
+          </div>
+          <span class="text-[10px] bg-amber-600 text-white font-bold px-2.5 py-1 rounded-md">Call</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       10. STICKY BOTTOM ACTION BAR (MOBILE ONLY)
+  ============================================== -->
+  <div class="fixed bottom-0 left-0 right-0 z-40 flex justify-center pointer-events-none">
+    <div class="w-full max-w-md bg-white/95 backdrop-blur-lg border-t border-slate-200 py-2.5 px-4 shadow-[0_-4px_15px_rgba(0,0,0,0.08)] flex items-center gap-2.5 pointer-events-auto">
+      <a href="tel:+919163621264" class="flex-1 py-2.5 px-3 bg-brand-navy hover:bg-slate-900 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-sm active:scale-95 transition">
+        <i class="fa-solid fa-phone text-amber-400"></i>
+        <span>Call Now</span>
+      </a>
+      
+      <button onclick="openInquiryModal('all')" class="flex-1 py-2.5 px-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-sm shadow-emerald-500/20 active:scale-95 transition">
+        <i class="fa-brands fa-whatsapp text-sm"></i>
+        <span>Enquire Now</span>
+      </button>
+    </div>
+  </div>
+
+  </div> <!-- End Mobile Frame Container -->
+
+  <!-- ==============================================
+       11. MODAL: SUBMIT REVIEW
+  ============================================== -->
+  <div id="reviewModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4 hidden transition-opacity">
+    <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl animate-in fade-in slide-in-from-bottom duration-300">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <h3 class="text-sm font-extrabold text-slate-900">Write a Review</h3>
+          <p class="text-[11px] text-slate-500">Share your experience at Gyanova Academy</p>
+        </div>
+        <button onclick="toggleReviewModal()" class="w-7 h-7 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-xs">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="reviewForm" onsubmit="submitReview(event)" class="mt-4 space-y-3">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">I am a</label>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center justify-center gap-1.5 p-2 border border-slate-200 rounded-xl text-xs font-medium cursor-pointer has-[:checked]:border-brand-royal has-[:checked]:bg-blue-50 has-[:checked]:text-brand-royal">
+              <input type="radio" name="reviewerType" value="Student" checked class="hidden">
+              <i class="fa-solid fa-user-graduate text-xs"></i> Student
+            </label>
+            <label class="flex items-center justify-center gap-1.5 p-2 border border-slate-200 rounded-xl text-xs font-medium cursor-pointer has-[:checked]:border-brand-royal has-[:checked]:bg-blue-50 has-[:checked]:text-brand-royal">
+              <input type="radio" name="reviewerType" value="Guardian" class="hidden">
+              <i class="fa-solid fa-users text-xs"></i> Guardian
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Your Name</label>
+          <input type="text" id="reviewerName" required placeholder="e.g. Rahul Das / Anjali Sen" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal">
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Class / Stream</label>
+          <select id="reviewerClass" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal bg-white">
+            <option value="Class 10 (Madhyamik Batch)">Class 10 (Madhyamik Batch)</option>
+            <option value="Class 9 (Secondary)">Class 9 (Secondary)</option>
+            <option value="Class 8 (Foundation)">Class 8 (Foundation)</option>
+            <option value="Class 7 (Foundation)">Class 7 (Foundation)</option>
+            <option value="Class 6 (Foundation)">Class 6 (Foundation)</option>
+            <option value="Class 5 (Primary)">Class 5 (Primary)</option>
+            <option value="Class 11 (Arts / Commerce)">Class 11 (Arts / Commerce)</option>
+            <option value="Class 12 (Arts / Commerce)">Class 12 (Arts / Commerce)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Your Rating</label>
+          <div class="flex items-center gap-2 text-2xl text-amber-400" id="starSelector">
+            <i class="fa-regular fa-star cursor-pointer text-slate-300 transition-colors" onclick="setRating(1)"></i>
+            <i class="fa-regular fa-star cursor-pointer text-slate-300 transition-colors" onclick="setRating(2)"></i>
+            <i class="fa-regular fa-star cursor-pointer text-slate-300 transition-colors" onclick="setRating(3)"></i>
+            <i class="fa-regular fa-star cursor-pointer text-slate-300 transition-colors" onclick="setRating(4)"></i>
+            <i class="fa-regular fa-star cursor-pointer text-slate-300 transition-colors" onclick="setRating(5)"></i>
+          </div>
+          <input type="hidden" id="selectedRating" value="0">
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-[11px] font-bold text-slate-700">Review Feedback</label>
+          </div>
+          <textarea id="reviewerComment" required minlength="30" rows="3" placeholder="Share your experience regarding teachers, mock tests, or doubt clearing (minimum 30 characters)..." class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-2.5 bg-brand-navy hover:bg-slate-900 text-white rounded-xl text-xs font-bold active:scale-98 transition shadow">
+          Submit Review
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==============================================
+       ADMIN PANEL (login + manage reviews & gallery photos)
+  ============================================== -->
+  <div id="adminModal" class="fixed inset-0 z-50 bg-black/60 flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
+    <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <span class="text-[10px] font-bold text-brand-accentRed uppercase">Gyanova Academy</span>
+          <h3 class="text-sm font-extrabold text-slate-900">Admin Panel</h3>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="adminLogoutBtn" onclick="adminLogout()" class="hidden text-[10px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 active:scale-95">Logout</button>
+          <button onclick="closeAdmin()" class="w-7 h-7 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-xs">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Login -->
+      <form id="adminLoginView" onsubmit="adminLogin(event)" class="mt-4 space-y-3">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Admin ID</label>
+          <input type="text" id="adminUser" required autocomplete="username" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Password</label>
+          <input type="password" id="adminPass" required autocomplete="current-password" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal">
+        </div>
+        <p id="adminLoginError" class="hidden text-[11px] text-red-600 font-semibold"></p>
+        <button type="submit" id="adminLoginBtn" class="w-full py-2.5 bg-brand-navy hover:bg-slate-900 text-white rounded-xl text-xs font-bold active:scale-98 transition shadow">Login</button>
+      </form>
+
+      <!-- Panel -->
+      <div id="adminPanelView" class="hidden mt-4">
+        <div class="grid grid-cols-2 gap-1.5 p-1 bg-slate-100 rounded-xl text-xs font-bold mb-3">
+          <button id="adminTabReviews" onclick="adminTab('reviews')" class="py-2 rounded-lg transition">Reviews</button>
+          <button id="adminTabPhotos" onclick="adminTab('photos')" class="py-2 rounded-lg transition">Photos</button>
+        </div>
+
+        <div id="adminReviewsPane">
+          <div id="adminReviewsList" class="space-y-2"></div>
+        </div>
+
+        <div id="adminPhotosPane" class="hidden">
+          <div class="rounded-2xl border border-dashed border-slate-300 p-3 bg-slate-50 space-y-2">
+            <label class="block text-[11px] font-bold text-slate-700">Upload photos to the Institute Gallery</label>
+            <input type="file" id="adminFiles" accept="image/*" multiple class="block w-full text-[11px] text-slate-600">
+            <input type="text" id="adminCaption" maxlength="100" placeholder="Caption (optional)" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal bg-white">
+            <button id="adminUploadBtn" onclick="adminUpload()" class="w-full py-2.5 bg-brand-navy hover:bg-slate-900 text-white rounded-xl text-xs font-bold active:scale-98 transition shadow">Upload</button>
+            <p id="adminUploadStatus" class="text-[11px] text-slate-500"></p>
+          </div>
+          <div id="adminPhotosGrid" class="grid grid-cols-3 gap-2 mt-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================
+       12. MODAL: ADMISSION INQUIRY (WITH CUSTOM DROPDOWN)
+  ============================================== -->
+  <div id="inquiryModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4 hidden transition-opacity">
+    <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl animate-in fade-in slide-in-from-bottom duration-300">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <span class="text-[10px] font-bold text-brand-accentRed uppercase">Gyanova Admissions</span>
+          <h3 class="text-sm font-extrabold text-slate-900">Direct Admission Desk</h3>
+        </div>
+        <button onclick="closeInquiryModal()" class="w-7 h-7 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-xs">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleInquirySubmit(event)" class="mt-4 space-y-3">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Student / Guardian Name</label>
+          <input type="text" id="inqName" required placeholder="Enter full name" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal">
+        </div>
+
+        <!-- Interactive Target Class / Program Dropdown with Concise Clean Typography -->
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Target Class / Program</label>
+          <div class="relative">
+            <select id="inqProgram" required class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal bg-white font-medium text-slate-700 appearance-none pr-8">
+              <!-- Dynamically populated based on source button click -->
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+              <i class="fa-solid fa-chevron-down text-[10px]"></i>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Message or Query (Optional)</label>
+          <textarea id="inqMessage" rows="2" placeholder="Fee details, batch timing, etc." class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-md shadow-emerald-600/30 active:scale-98 transition">
+          <i class="fa-brands fa-whatsapp text-sm"></i> Send Instant Inquiry via WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white text-xs px-4 py-2.5 rounded-full shadow-lg border border-slate-700 flex items-center gap-2 opacity-0 pointer-events-none transition-all duration-300">
+    <i class="fa-solid fa-circle-check text-emerald-400"></i>
+    <span id="toastMsg">Review recorded successfully!</span>
+  </div>
+
+  <!-- ==============================================
+       13. JAVASCRIPT LOGIC
+  ============================================== -->
+  <script>
+    // --- 1. ULTRA-SMOOTH WELCOME & INTRO TRANSITIONS ---
+    let introSkipped = false;
+    const sloganBengali = "যা বিদ্যা সা বিমুক্তয়ে";
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const phaseWelcome = document.getElementById('phaseWelcome');
+      const phaseBrand = document.getElementById('phaseBrand');
+
+      // Step A: Phase 1 'Welcome' emerges with gentle scale
+      setTimeout(() => {
+        if (introSkipped || !phaseWelcome) return;
+        phaseWelcome.classList.remove('opacity-0', 'scale-95');
+        phaseWelcome.classList.add('opacity-100', 'scale-100');
+      }, 250);
+
+      // Step B: Cinematic Cross-Dissolve to Phase 2 'Gyanova Academy'
+      setTimeout(() => {
+        if (introSkipped || !phaseWelcome || !phaseBrand) return;
+        
+        // Dissolve Phase 1 out smoothly
+        phaseWelcome.classList.remove('opacity-100', 'scale-100');
+        phaseWelcome.classList.add('opacity-0', 'scale-105');
+
+        // Dissolve Phase 2 in simultaneously (cross-fade)
+        phaseBrand.classList.remove('opacity-0', 'scale-95');
+        phaseBrand.classList.add('opacity-100', 'scale-100');
+        
+        // Trigger typewriter after brand fades in
+        setTimeout(startBengaliTypewriter, 400);
+      }, 2200);
+
+      // Step C: Auto-dismiss splash screen after typewriter and showcase
+      setTimeout(() => {
+        if (!introSkipped) skipIntro();
+      }, 6200);
+    });
+
+    function startBengaliTypewriter() {
+      if (introSkipped) return;
+      const targetElement = document.getElementById('bengaliTypewriter');
+      const cursor = document.getElementById('typewriterCursor');
+      const closingQuote = document.getElementById('closingQuote');
+      if (!targetElement) return;
+
+      const characters = Array.from(sloganBengali);
+      let charIndex = 0;
+
+      const typeInterval = setInterval(() => {
+        if (introSkipped || charIndex >= characters.length) {
+          clearInterval(typeInterval);
+          if (closingQuote) closingQuote.classList.remove('opacity-0');
+          setTimeout(() => {
+            if (cursor) cursor.style.display = 'none';
+          }, 1000);
+          return;
+        }
+
+        targetElement.textContent += characters[charIndex];
+        charIndex++;
+      }, 85);
+    }
+
+    function skipIntro() {
+      introSkipped = true;
+      const splash = document.getElementById('introSplash');
+      if (splash) {
+        splash.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => splash.remove(), 1000);
+      }
+    }
+
+    // --- 2. MOBILE MENU ---
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileNavMenu');
+      const icon = document.getElementById('menuIcon');
+      menu.classList.toggle('hidden');
+      if (menu.classList.contains('hidden')) {
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+      } else {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+      }
+    }
+
+    // --- 3. BI-DIRECTIONAL INFINITE SLOW-MOTION & MANUAL COLLAGE SCROLLER ---
+    // Row 1 drifts Right, Row 2 drifts Left with seamless infinite wrap
+    let wasDraggingCollage = false;
+
+    function handleCollageItemClick(e, url, title, desc) {
+      if (wasDraggingCollage) {
+        e.preventDefault();
+        return;
+      }
+      openLightboxImage(url, title, desc);
+    }
+
+    function setupInfiniteRow(rowId, trackId, direction, gen) {
+      const row = document.getElementById(rowId);
+      const track = document.getElementById(trackId);
+      if (!row || !track) return;
+
+      // Duplicate the inner content to ensure smooth, seamless looping
+      const originalHTML = track.innerHTML;
+      track.innerHTML = originalHTML + originalHTML;
+
+      let singleSetWidth = track.scrollWidth / 2;
+      
+      // Re-measure on resize or image loads
+      window.addEventListener('resize', () => {
+        singleSetWidth = track.scrollWidth / 2;
+      });
+
+      // Direction: 1 for drifting to the Right (content moves right -> scrollLeft decreases)
+      //           -1 for drifting to the Left (content moves left -> scrollLeft increases)
+      const speed = 0.55; // gentle slow-motion speed
+      let isInteracting = false;
+      let resumeTimeout = null;
+
+      // Initialize initial scroll position for Row 1 so it can drift backward smoothly
+      if (direction === 'right') {
+        row.scrollLeft = singleSetWidth;
+      }
+
+      function step() {
+        if (gen !== galleryGen) return;   // a newer gallery render replaced this loop
+        if (!isInteracting && singleSetWidth > 0) {
+          if (direction === 'left') {
+            row.scrollLeft += speed;
+            if (row.scrollLeft >= singleSetWidth) {
+              row.scrollLeft -= singleSetWidth; // seamless snapback
+            }
+          } else {
+            row.scrollLeft -= speed;
+            if (row.scrollLeft <= 0) {
+              row.scrollLeft += singleSetWidth; // seamless wrap
+            }
+          }
+        }
+        requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+
+      // Touch events for smooth swipe
+      row.addEventListener('touchstart', () => {
+        isInteracting = true;
+        wasDraggingCollage = false;
+        if (resumeTimeout) clearTimeout(resumeTimeout);
+      }, { passive: true });
+
+      row.addEventListener('touchmove', () => {
+        wasDraggingCollage = true;
+        isInteracting = true;
+      }, { passive: true });
+
+      row.addEventListener('touchend', () => {
+        resumeTimeout = setTimeout(() => {
+          isInteracting = false;
+          wasDraggingCollage = false;
+        }, 1600);
+      }, { passive: true });
+
+      // Mouse drag for desktop browsers
+      let isMouseDown = false;
+      let startX = 0;
+      let initialScroll = 0;
+
+      row.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        isInteracting = true;
+        wasDraggingCollage = false;
+        startX = e.pageX - row.offsetLeft;
+        initialScroll = row.scrollLeft;
+        if (resumeTimeout) clearTimeout(resumeTimeout);
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isMouseDown) {
+          isMouseDown = false;
+          resumeTimeout = setTimeout(() => {
+            isInteracting = false;
+            wasDraggingCollage = false;
+          }, 1400);
+        }
+      });
+
+      row.addEventListener('mousemove', (e) => {
+        if (!isMouseDown) return;
+        e.preventDefault();
+        const currentX = e.pageX - row.offsetLeft;
+        const diff = currentX - startX;
+        if (Math.abs(diff) > 5) {
+          wasDraggingCollage = true;
+        }
+        row.scrollLeft = initialScroll - diff;
+      });
+
+      row.addEventListener('mouseleave', () => {
+        if (isMouseDown) {
+          isMouseDown = false;
+          resumeTimeout = setTimeout(() => {
+            isInteracting = false;
+            wasDraggingCollage = false;
+          }, 1200);
+        }
+      });
+    }
+
+    function openLightboxImage(url, title, desc) {
+      document.getElementById('lightboxImg').src = url;
+      document.getElementById('lightboxTitle').textContent = title;
+      document.getElementById('lightboxDesc').textContent = desc;
+      document.getElementById('imageLightboxModal').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      document.getElementById('imageLightboxModal').classList.add('hidden');
+    }
+
+    // --- 4. REVIEWS SYSTEM (3 PER SCREEN WITH TOUCH/DRAG SWIPE & BUBBLES) ---
+    // ====== GOOGLE SHEET REVIEWS ======
+    // Paste your Apps Script Web App URL (ends with /exec) below:
+    const REVIEWS_API = 'https://script.google.com/macros/s/AKfycbznnymTtqmPMm4xhyH81hmTB5U5ixgJDkwDr7nNZIHrIvcOUWTGNCdJKKYb53YJB9E/exec';
+
+    let sheetReviews = [];   // live reviews from Google Sheet (newest first)
+    let reviewsState = 'loading';   // loading | ready | error | off
+
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    // Only reviews that exist in the Google Sheet (newest first)
+    function getAllReviews() {
+      return sheetReviews;
+    }
+
+    // Always show date only, e.g. "31 Oct 2026"
+    function fmtReviewDate(v) {
+      if (!v) return '';
+      if (/^\d{1,2} [A-Za-z]{3} \d{4}$/.test(String(v).trim())) return String(v).trim();
+      const d = new Date(String(v).replace(/,\s*(\d{1,2}:\d{2}.*)$/, ''));
+      if (isNaN(d)) return String(v).split(',')[0];
+      return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' });
+    }
+
+    function mapSheetReview(r) {
+      return {
+        name: r.name,
+        role: r.role,
+        batch: r.role === 'Guardian' ? `Guardian of ${r.class}` : r.class,
+        rating: r.rating,
+        comment: r.comment,
+        date: fmtReviewDate(r.date),
+        row: r.row,
+        ts: r.ts
+      };
+    }
+
+    async function loadReviewsFromSheet() {
+      if (!REVIEWS_API || REVIEWS_API.startsWith('PASTE_')) {
+        reviewsState = 'off';
+        renderReviewsCarousel();
+        return;
+      }
+      try {
+        const res = await fetch(REVIEWS_API);
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Failed');
+        sheetReviews = data.reviews.map(mapSheetReview);
+        reviewsState = 'ready';
+      } catch (err) {
+        console.error('Could not load reviews', err);
+        reviewsState = 'error';
+      }
+      renderReviewsCarousel();
+    }
+
+    let currentReviewPage = 0;
+    let totalReviewPages = 1;
+
+    function renderReviewsCarousel() {
+      const reviews = getAllReviews();
+      const track = document.getElementById('reviewsPagesTrack');
+      const bubblesContainer = document.getElementById('reviewsBubbles');
+      const paginationWrapper = document.getElementById('reviewsPaginationContainer');
+      if (!track || !bubblesContainer) return;
+
+      if (reviews.length === 0) {
+        const msgs = {
+          loading: 'Loading reviews…',
+          error: 'Reviews are unavailable right now.',
+          off: 'Reviews will appear here soon.',
+          ready: 'No reviews yet. Be the first to share your experience!'
+        };
+        track.innerHTML = `<div class="w-full shrink-0 px-0.5"><div class="bg-white rounded-2xl p-5 text-center text-xs text-slate-500 border border-slate-200/80">${msgs[reviewsState] || ''}</div></div>`;
+        paginationWrapper.classList.add('hidden');
+        currentReviewPage = 0;
+        updateReviewTrackPosition();
+        return;
+      }
+
+      const perPage = 3;
+      totalReviewPages = Math.ceil(reviews.length / perPage);
+
+      // Clamp current page
+      if (currentReviewPage >= totalReviewPages) {
+        currentReviewPage = Math.max(0, totalReviewPages - 1);
+      }
+
+      // Group reviews into pages of 3
+      let pagesHTML = '';
+      for (let p = 0; p < totalReviewPages; p++) {
+        const pageItems = reviews.slice(p * perPage, (p + 1) * perPage);
+        pagesHTML += `
+          <div class="w-full shrink-0 space-y-3 px-0.5">
+            ${pageItems.map((r, itemIdx) => {
+              const globalIndex = p * perPage + itemIdx;
+              return `
+              <div onclick="openReviewFocusModal(${globalIndex})" class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 transition-all hover:shadow-md hover:border-slate-300 active:scale-[0.99] cursor-pointer">
+                <div class="flex items-start justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-full ${r.role === 'Guardian' ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-brand-royal'} flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
+                      ${esc(r.name.charAt(0).toUpperCase())}
+                    </div>
+                    <div>
+                      <div class="flex items-center gap-1.5">
+                        <h4 class="text-xs font-extrabold text-slate-900">${esc(r.name)}</h4>
+                        <span class="text-[9px] px-1.5 py-0.2 rounded font-semibold ${r.role === 'Guardian' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-blue-50 text-brand-royal border border-blue-200'}">
+                          ${esc(r.role)}
+                        </span>
+                      </div>
+                      <p class="text-[10px] text-slate-500 font-medium">${esc(r.batch)}</p>
+                      ${r.date ? `<p class="text-[9px] text-slate-400 mt-0.5"><i class="fa-regular fa-clock"></i> ${esc(r.date)}</p>` : ''}
+                    </div>
+                  </div>
+                  <div class="flex text-amber-400 text-[10px]">
+                    ${Array(r.rating || 5).fill('<i class="fa-solid fa-star"></i>').join('')}
+                  </div>
+                </div>
+                <div class="mt-2.5 bg-slate-50 p-2.5 rounded-xl border border-slate-100/80">
+                  <p class="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                    “${esc(r.comment)}”
+                  </p>
+                </div>
+              </div>
+            `;
+            }).join('')}
+          </div>
+        `;
+      }
+      track.innerHTML = pagesHTML;
+
+      // Render pagination bubbles if more than 1 page
+      if (totalReviewPages > 1) {
+        paginationWrapper.classList.remove('hidden');
+        bubblesContainer.innerHTML = Array.from({ length: totalReviewPages }).map((_, idx) => `
+          <button onclick="goToReviewPage(${idx})" class="transition-all duration-300 ${idx === currentReviewPage ? 'w-6 h-2 bg-brand-navy rounded-full shadow-xs' : 'w-2 h-2 bg-slate-300 hover:bg-slate-400 rounded-full'}" aria-label="Go to reviews page ${idx + 1}"></button>
+        `).join('');
+      } else {
+        paginationWrapper.classList.add('hidden');
+      }
+
+      updateReviewTrackPosition();
+    }
+
+    function updateReviewTrackPosition() {
+      const track = document.getElementById('reviewsPagesTrack');
+      if (track) {
+        track.style.transform = `translateX(-${currentReviewPage * 100}%)`;
+      }
+
+      // Update bubbles indicator styling
+      const bubbles = document.querySelectorAll('#reviewsBubbles button');
+      bubbles.forEach((btn, idx) => {
+        if (idx === currentReviewPage) {
+          btn.className = 'w-6 h-2 bg-brand-navy rounded-full shadow-xs transition-all duration-300';
+        } else {
+          btn.className = 'w-2 h-2 bg-slate-300 hover:bg-slate-400 rounded-full transition-all duration-300';
+        }
+      });
+    }
+
+    function goToReviewPage(idx) {
+      if (idx >= 0 && idx < totalReviewPages) {
+        currentReviewPage = idx;
+        updateReviewTrackPosition();
+      }
+    }
+
+    function nextReviewPage() {
+      if (currentReviewPage < totalReviewPages - 1) {
+        currentReviewPage++;
+        updateReviewTrackPosition();
+      }
+    }
+
+    function prevReviewPage() {
+      if (currentReviewPage > 0) {
+        currentReviewPage--;
+        updateReviewTrackPosition();
+      }
+    }
+
+    // --- REVIEW FOCUS / BLUR EXPANSION ---
+    function openReviewFocusModal(index) {
+      if (wasSwipingReviews) return;
+      const r = getAllReviews()[index];
+      if (!r) return;
+
+      const modal = document.getElementById('reviewFocusModal');
+      const card = document.getElementById('reviewFocusCard');
+      const avatar = document.getElementById('focusAvatar');
+      const name = document.getElementById('focusName');
+      const roleBadge = document.getElementById('focusRoleBadge');
+      const batch = document.getElementById('focusBatch');
+      const stars = document.getElementById('focusStars');
+      const comment = document.getElementById('focusComment');
+
+      avatar.textContent = r.name.charAt(0);
+      avatar.className = `w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs shrink-0 shadow-xs ${r.role === 'Guardian' ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-brand-royal'}`;
+
+      name.textContent = r.name;
+      roleBadge.textContent = r.role;
+      roleBadge.className = `text-[9px] px-1.5 py-0.2 rounded font-semibold ${r.role === 'Guardian' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-blue-50 text-brand-royal border border-blue-200'}`;
+      batch.innerHTML = `${esc(r.batch)}${r.date ? `<span class="block">${esc(r.date)}</span>` : ''}`;
+      stars.innerHTML = Array(r.rating || 5).fill('<i class="fa-solid fa-star"></i>').join('');
+      comment.textContent = `“${r.comment}”`;
+
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        card.classList.remove('scale-95');
+        card.classList.add('scale-100');
+      }, 10);
+    }
+
+    function closeReviewFocusModal(e) {
+      if (e && e.target !== e.currentTarget && !e.target.closest('button')) return;
+      const modal = document.getElementById('reviewFocusModal');
+      const card = document.getElementById('reviewFocusCard');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 150);
+    }
+
+    // Touch and drag swipe listeners for reviews
+    let wasSwipingReviews = false;
+    function setupReviewsSwipe() {
+      const track = document.getElementById('reviewsPagesTrack');
+      if (!track) return;
+
+      let startX = 0;
+      let endX = 0;
+      let isSwiping = false;
+
+      track.addEventListener('touchstart', (e) => {
+        startX = e.changedTouches[0].screenX;
+        isSwiping = true;
+        wasSwipingReviews = false;
+      }, { passive: true });
+
+      track.addEventListener('touchmove', () => {
+        wasSwipingReviews = true;
+      }, { passive: true });
+
+      track.addEventListener('touchend', (e) => {
+        if (!isSwiping) return;
+        endX = e.changedTouches[0].screenX;
+        handleSwipeGesture();
+        isSwiping = false;
+        setTimeout(() => { wasSwipingReviews = false; }, 200);
+      }, { passive: true });
+
+      // Mouse drag support for desktop
+      let isMouseDown = false;
+      track.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        startX = e.clientX;
+        wasSwipingReviews = false;
+      });
+
+      track.addEventListener('mousemove', (e) => {
+        if (!isMouseDown) return;
+        if (Math.abs(e.clientX - startX) > 8) {
+          wasSwipingReviews = true;
+        }
+      });
+
+      window.addEventListener('mouseup', (e) => {
+        if (!isMouseDown) return;
+        isMouseDown = false;
+        endX = e.clientX;
+        handleSwipeGesture();
+        setTimeout(() => { wasSwipingReviews = false; }, 200);
+      });
+
+      function handleSwipeGesture() {
+        const threshold = 45; // min swipe distance in px
+        const diff = startX - endX;
+        if (diff > threshold) {
+          // Left swipe -> show next 3
+          nextReviewPage();
+        } else if (diff < -threshold) {
+          // Right swipe -> show previous 3
+          prevReviewPage();
+        }
+      }
+    }
+
+    function toggleReviewModal() {
+      const modal = document.getElementById('reviewModal');
+      modal.classList.toggle('hidden');
+      if (!modal.classList.contains('hidden')) {
+        resetStars();
+      }
+    }
+
+    function resetStars() {
+      document.getElementById('selectedRating').value = '0';
+      const starIcons = document.querySelectorAll('#starSelector i');
+      starIcons.forEach(icon => {
+        icon.className = 'fa-regular fa-star cursor-pointer text-slate-300 transition-colors';
+      });
+    }
+
+    function setRating(stars) {
+      document.getElementById('selectedRating').value = stars;
+      const starIcons = document.querySelectorAll('#starSelector i');
+      starIcons.forEach((icon, index) => {
+        if (index < stars) {
+          icon.className = 'fa-solid fa-star cursor-pointer text-amber-400 transition-colors';
+        } else {
+          icon.className = 'fa-regular fa-star cursor-pointer text-slate-300 transition-colors';
+        }
+      });
+    }
+
+    let reviewSubmitting = false;
+
+    async function submitReview(event) {
+      event.preventDefault();
+      if (reviewSubmitting) return;
+
+      const rating = parseInt(document.getElementById('selectedRating').value);
+      if (!rating || rating < 1) {
+        showToast('Please select a star rating first!');
+        return;
+      }
+
+      const comment = document.getElementById('reviewerComment').value.trim();
+      if (comment.length < 30) {
+        showToast('Please enter at least 30 characters in your review feedback!');
+        return;
+      }
+
+      const role = document.querySelector('input[name="reviewerType"]:checked').value;
+      const name = document.getElementById('reviewerName').value.trim();
+      const cls = document.getElementById('reviewerClass').value;
+
+      if (!REVIEWS_API || REVIEWS_API.startsWith('PASTE_')) {
+        showToast('Review service is not connected yet.');
+        return;
+      }
+
+      const btn = event.target.querySelector('button[type="submit"]');
+      const btnText = btn.textContent;
+      reviewSubmitting = true;
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+
+      try {
+        // text/plain avoids a CORS preflight, which Apps Script does not support
+        const res = await fetch(REVIEWS_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ name, class: cls, rating, feedback: comment, role })
+        });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Failed');
+
+        // show it immediately at the top, then sync with the sheet
+        const now = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' });
+        sheetReviews.unshift(mapSheetReview({ name, class: cls, rating, comment, role, date: now }));
+
+        currentReviewPage = 0;
+        renderReviewsCarousel();
+        toggleReviewModal();
+        document.getElementById('reviewForm').reset();
+        resetStars();
+        showToast('Thank you! Your review has been published.');
+        loadReviewsFromSheet();
+      } catch (err) {
+        console.error(err);
+        showToast('Could not submit review. Please try again.');
+      } finally {
+        reviewSubmitting = false;
+        btn.disabled = false;
+        btn.textContent = btnText;
+      }
+    }
+
+    // --- 5. ADMISSION INQUIRY (SCOPED TARGET CLASS DROPDOWN & WHATSAPP) ---
+    function openInquiryModal(scope) {
+      const selectElem = document.getElementById('inqProgram');
+      if (!selectElem) return;
+
+      // Clear previous options
+      selectElem.innerHTML = '';
+
+      // Default "Select Class" unselected placeholder option
+      const defaultOpt = document.createElement('option');
+      defaultOpt.value = '';
+      defaultOpt.textContent = 'Select Class';
+      defaultOpt.disabled = true;
+      defaultOpt.selected = true;
+      selectElem.appendChild(defaultOpt);
+
+      if (scope === '5-10') {
+        // Scoped specifically to Class 5 - 10
+        const classes = ['Class 5', 'Class 6', 'Class 7', 'Class 8', 'Class 9', 'Class 10'];
+        classes.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = `${c} Admission Enquiry`;
+          opt.textContent = c;
+          selectElem.appendChild(opt);
+        });
+      } else if (scope === '11-12') {
+        // Scoped specifically to Class 11 & 12
+        const classes = ['Class 11', 'Class 12'];
+        classes.forEach(c => {
+          const opt = document.createElement('option');
+          opt.value = `${c} Admission Enquiry`;
+          opt.textContent = c;
+          selectElem.appendChild(opt);
+        });
+      } else {
+        // General / All option (e.g. from bottom bar)
+        const groups = [
+          { group: 'Secondary (WBBSE)', items: ['Class 5', 'Class 6', 'Class 7', 'Class 8', 'Class 9', 'Class 10'] },
+          { group: 'Higher Secondary (WBCHSE)', items: ['Class 11', 'Class 12'] }
+        ];
+        groups.forEach(g => {
+          const optGroup = document.createElement('optgroup');
+          optGroup.label = g.group;
+          g.items.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = `${c} Admission Enquiry`;
+            opt.textContent = c;
+            optGroup.appendChild(opt);
+          });
+          selectElem.appendChild(optGroup);
+        });
+      }
+
+      document.getElementById('inquiryModal').classList.remove('hidden');
+    }
+
+    function closeInquiryModal() {
+      document.getElementById('inquiryModal').classList.add('hidden');
+    }
+
+    function handleInquirySubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('inqName').value.trim();
+      const program = document.getElementById('inqProgram').value;
+      const query = document.getElementById('inqMessage').value.trim();
+
+      const messageText = `Hello Gyanova Academy,%0A%0AI would like to enquire about admission:%0A- Name: ${encodeURIComponent(name)}%0A- Program: ${encodeURIComponent(program)}%0A${query ? `- Note: ${encodeURIComponent(query)}` : ''}%0A%0APlease share admission details and fee structure.`;
+
+      const whatsappUrl = `https://wa.me/919163621264?text=${messageText}`;
+      window.open(whatsappUrl, '_blank');
+      closeInquiryModal();
+      showToast('Opening WhatsApp Admission Desk...');
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.textContent = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+
+    // --- 6. CENTER CAROUSEL (20-SECOND AUTO-SWIPE & TOUCH GESTURES) ---
+    let currentCenterIndex = 0;
+    const totalCenters = 2;
+    let centerAutoSwipeInterval = null;
+
+    function updateCenterCarouselUI() {
+      const track = document.getElementById('centersCarouselTrack');
+      if (!track) return;
+
+      track.style.transform = `translateX(-${currentCenterIndex * 100}%)`;
+
+      const tab0 = document.getElementById('centerTab0');
+      const tab1 = document.getElementById('centerTab1');
+
+      if (tab0 && tab1) {
+        if (currentCenterIndex === 0) {
+          tab0.className = 'py-2.5 px-2 rounded-xl bg-[#091c36] text-white shadow-sm transition-all flex items-center justify-center gap-1.5 text-center leading-tight';
+          tab1.className = 'py-2.5 px-2 rounded-xl text-slate-700 hover:text-slate-900 transition-all flex items-center justify-center gap-1.5 text-center leading-tight';
+        } else {
+          tab1.className = 'py-2.5 px-2 rounded-xl bg-[#091c36] text-white shadow-sm transition-all flex items-center justify-center gap-1.5 text-center leading-tight';
+          tab0.className = 'py-2.5 px-2 rounded-xl text-slate-700 hover:text-slate-900 transition-all flex items-center justify-center gap-1.5 text-center leading-tight';
+        }
+      }
+    }
+
+    function switchCenterSlide(index) {
+      currentCenterIndex = index;
+      updateCenterCarouselUI();
+      restartCenterAutoSwipe();
+    }
+
+    function nextCenterSlide() {
+      currentCenterIndex = (currentCenterIndex + 1) % totalCenters;
+      updateCenterCarouselUI();
+      restartCenterAutoSwipe();
+    }
+
+    function prevCenterSlide() {
+      currentCenterIndex = (currentCenterIndex - 1 + totalCenters) % totalCenters;
+      updateCenterCarouselUI();
+      restartCenterAutoSwipe();
+    }
+
+    function startCenterAutoSwipe() {
+      if (centerAutoSwipeInterval) clearInterval(centerAutoSwipeInterval);
+      // Auto-swipe every 20 seconds
+      centerAutoSwipeInterval = setInterval(() => {
+        currentCenterIndex = (currentCenterIndex + 1) % totalCenters;
+        updateCenterCarouselUI();
+      }, 20000);
+    }
+
+    function restartCenterAutoSwipe() {
+      clearInterval(centerAutoSwipeInterval);
+      startCenterAutoSwipe();
+    }
+
+    function setupCenterTouchGestures() {
+      const carousel = document.getElementById('centersCarouselTrack');
+      if (!carousel) return;
+      let startX = 0;
+      let endX = 0;
+
+      carousel.addEventListener('touchstart', (e) => {
+        startX = e.changedTouches[0].screenX;
+        clearInterval(centerAutoSwipeInterval);
+      }, { passive: true });
+
+      carousel.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].screenX;
+        if (startX - endX > 40) {
+          nextCenterSlide();
+        } else if (endX - startX > 40) {
+          prevCenterSlide();
+        } else {
+          startCenterAutoSwipe();
+        }
+      }, { passive: true });
+    }
+
+    // --- GALLERY FROM GOOGLE DRIVE ("institute img" folder) ---
+    let galleryImages = [];
+    let galleryGen = 0;
+    let galleryState = 'loading';   // loading | ready | error | off
+    let galleryErrorMsg = '';
+    const COLLAGE_WIDTHS = ['w-36', 'w-56', 'w-40', 'w-52', 'w-44'];
+
+    function apiUrl(query) {
+      return REVIEWS_API + (REVIEWS_API.includes('?') ? '&' : '?') + query;
+    }
+
+    function driveImg(id, w) {
+      return `https://lh3.googleusercontent.com/d/${encodeURIComponent(id)}=w${w}`;
+    }
+
+    // Image loading chain: direct googleusercontent link -> Drive thumbnail -> sent by the script itself
+    function imgAttrs(id, w, kind) {
+      return `src="${driveImg(id, w)}" data-id="${esc(id)}" data-w="${w}" data-kind="${kind}" data-step="0" referrerpolicy="no-referrer" onerror="imgFallback(this)"`;
+    }
+
+    function imgFallback(el) {
+      const id = el.dataset.id, w = el.dataset.w, kind = el.dataset.kind || 'thumb';
+      const step = parseInt(el.dataset.step || '0', 10);
+      el.dataset.step = step + 1;
+      if (step === 0) {
+        el.src = `https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w${w}`;
+      } else if (step === 1) {
+        loadImgViaScript(el, id, kind);
+      } else {
+        el.onerror = null;
+        el.style.opacity = '0';
+      }
+    }
+
+    async function loadImgViaScript(el, id, kind) {
+      try {
+        const res = await fetch(apiUrl(`action=${kind}&id=${encodeURIComponent(id)}`));
+        const data = await res.json();
+        if (data.ok) { el.src = data.data; return; }
+        console.error('Image fallback failed:', data.error);
+      } catch (err) {
+        console.error('Image fallback failed', err);
+      }
+      el.onerror = null;
+      el.style.opacity = '0';
+    }
+
+    function prettyName(name) {
+      return String(name || '').replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' ').trim();
+    }
+
+    function galleryItemHTML(img, i) {
+      const w = COLLAGE_WIDTHS[i % COLLAGE_WIDTHS.length];
+      const title = img.caption || prettyName(img.name);
+      return `
+        <div onclick="handleGalleryClick(event, '${esc(img.id)}')"
+             class="${w} h-36 shrink-0 rounded-2xl overflow-hidden shadow-sm border border-slate-200 bg-slate-200 relative group cursor-pointer active:scale-95 transition">
+          <img ${imgAttrs(img.id, 600, 'thumb')} alt="${esc(title)}" loading="lazy" class="w-full h-full object-cover">
+          ${img.caption ? `<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition p-2 flex items-end"><span class="text-[10px] text-white font-bold leading-tight">${esc(img.caption)}</span></div>` : ''}
+        </div>`;
+    }
+
+    function handleGalleryClick(e, id) {
+      if (wasDraggingCollage) { e.preventDefault(); return; }
+      const img = galleryImages.find(x => x.id === id);
+      if (!img) return;
+      openLightboxImage(driveImg(id, 1600), img.caption || prettyName(img.name) || 'Campus Photo', img.date ? `Added on ${img.date}` : 'Gyanova Academy');
+      const big = document.getElementById('lightboxImg');
+      big.style.opacity = '1';
+      big.dataset.id = id; big.dataset.w = '1600'; big.dataset.kind = 'photo'; big.dataset.step = '0';
+      big.referrerPolicy = 'no-referrer';
+      big.onerror = () => imgFallback(big);
+      const tag = document.getElementById('lightboxTag');
+      if (tag) tag.textContent = 'Campus Gallery';
+    }
+
+    function resetCollageRow(rowId, trackId) {
+      const old = document.getElementById(rowId);
+      const fresh = old.cloneNode(false);          // drops old event listeners
+      fresh.innerHTML = `<div id="${trackId}" class="flex items-center gap-2.5 shrink-0 w-max"></div>`;
+      old.replaceWith(fresh);
+      return { row: fresh, track: fresh.firstElementChild };
+    }
+
+    function renderGallery() {
+      galleryGen++;   // stops any previous animation loop
+      const msg = document.getElementById('galleryEmpty');
+      const a = resetCollageRow('collageRow1', 'trackRow1');
+      const b = resetCollageRow('collageRow2', 'trackRow2');
+
+      if (galleryImages.length === 0) {
+        const msgs = {
+          loading: 'Loading photos…',
+          error: 'Photos are unavailable right now.',
+          off: 'Photos will appear here soon.',
+          ready: 'No photos found in the Drive folder yet.'
+        };
+        msg.textContent = msgs[galleryState] || '';
+        if (galleryState === 'error' && galleryErrorMsg) {
+          const detail = document.createElement('span');
+          detail.className = 'block mt-1 text-[10px] text-slate-400';
+          detail.textContent = galleryErrorMsg;
+          msg.appendChild(detail);
+        }
+        msg.classList.remove('hidden');
+        a.row.classList.add('hidden');
+        b.row.classList.add('hidden');
+        return;
+      }
+
+      msg.classList.add('hidden');
+
+      // Few photos: one plain swipeable row. Many photos: two opposing auto-scroll rows.
+      if (galleryImages.length < 8) {
+        a.track.innerHTML = galleryImages.map(galleryItemHTML).join('');
+        a.row.classList.remove('hidden');
+        b.row.classList.add('hidden');
+        return;
+      }
+
+      a.track.innerHTML = galleryImages.filter((_, i) => i % 2 === 0).map(galleryItemHTML).join('');
+      b.track.innerHTML = galleryImages.filter((_, i) => i % 2 === 1).map(galleryItemHTML).join('');
+      a.row.classList.remove('hidden');
+      b.row.classList.remove('hidden');
+
+      const gen = galleryGen;
+      setupInfiniteRow('collageRow1', 'trackRow1', 'right', gen);
+      setupInfiniteRow('collageRow2', 'trackRow2', 'left', gen);
+    }
+
+    async function loadGalleryFromDrive() {
+      if (!REVIEWS_API || REVIEWS_API.startsWith('PASTE_')) {
+        galleryState = 'off';
+        galleryImages = [];
+        renderGallery();
+        return;
+      }
+      try {
+        const res = await fetch(apiUrl('action=images'));
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Failed');
+        if (!Array.isArray(data.images)) {
+          throw new Error('The Apps Script is an old version. Paste the latest Code.gs, then Deploy > Manage deployments > Edit > New version > Deploy.');
+        }
+        galleryImages = data.images;
+        galleryState = 'ready';
+        galleryErrorMsg = '';
+      } catch (err) {
+        console.error('Could not load gallery', err);
+        galleryImages = [];
+        galleryState = 'error';
+        galleryErrorMsg = /failed to fetch|networkerror|load failed/i.test(String(err.message))
+          ? 'Could not reach the Apps Script. Check that the Web App access is set to "Anyone".'
+          : String(err.message || err);
+      }
+      renderGallery();
+      if (adminAuth) renderAdminPhotos();
+    }
+
+    // --- ADMIN PANEL ---
+    // Credentials are checked on the server (Code.gs), never stored in this page.
+    let adminAuth = null;     // kept in memory only; cleared on logout / page refresh
+    let adminBusy = false;
+
+    async function apiPost(payload, withAuth) {
+      if (!REVIEWS_API || REVIEWS_API.startsWith('PASTE_')) throw new Error('Backend URL is not set');
+      const body = withAuth && adminAuth ? Object.assign({}, payload, { user: adminAuth.user, pass: adminAuth.pass }) : payload;
+      const res = await fetch(REVIEWS_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(body)
+      });
+      return res.json();
+    }
+
+    function openAdmin() {
+      document.getElementById('adminModal').classList.remove('hidden');
+      showAdminView();
+    }
+
+    function closeAdmin() {
+      document.getElementById('adminModal').classList.add('hidden');
+    }
+
+    function showAdminView() {
+      const loggedIn = !!adminAuth;
+      document.getElementById('adminLoginView').classList.toggle('hidden', loggedIn);
+      document.getElementById('adminPanelView').classList.toggle('hidden', !loggedIn);
+      document.getElementById('adminLogoutBtn').classList.toggle('hidden', !loggedIn);
+      if (loggedIn) {
+        adminTab('reviews');
+        renderAdminReviews();
+        renderAdminPhotos();
+      } else {
+        setTimeout(() => document.getElementById('adminUser').focus(), 50);
+      }
+    }
+
+    async function adminLogin(event) {
+      event.preventDefault();
+      const user = document.getElementById('adminUser').value.trim();
+      const pass = document.getElementById('adminPass').value;
+      const err = document.getElementById('adminLoginError');
+      const btn = document.getElementById('adminLoginBtn');
+      err.classList.add('hidden');
+      btn.disabled = true;
+      btn.textContent = 'Checking...';
+      try {
+        const data = await apiPost({ action: 'login', user, pass }, false);
+        if (!data.ok) throw new Error(data.error || 'Login failed');
+        // hand the session to admin.html (kept only for this browser tab)
+        sessionStorage.setItem('gyanova_admin', JSON.stringify({ user, pass }));
+        document.getElementById('adminPass').value = '';
+        window.location.href = 'admin.html';
+      } catch (e) {
+        err.textContent = e.message || 'Login failed';
+        err.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Login';
+      }
+    }
+
+    function adminLogout() {
+      adminAuth = null;
+      document.getElementById('adminUser').value = '';
+      document.getElementById('adminPass').value = '';
+      showAdminView();
+    }
+
+    function adminTab(tab) {
+      const isReviews = tab === 'reviews';
+      document.getElementById('adminReviewsPane').classList.toggle('hidden', !isReviews);
+      document.getElementById('adminPhotosPane').classList.toggle('hidden', isReviews);
+      const on = 'py-2 rounded-lg transition bg-white text-brand-navy shadow-sm';
+      const off = 'py-2 rounded-lg transition text-slate-500';
+      document.getElementById('adminTabReviews').className = isReviews ? on : off;
+      document.getElementById('adminTabPhotos').className = isReviews ? off : on;
+    }
+
+    function renderAdminReviews() {
+      const list = document.getElementById('adminReviewsList');
+      if (!sheetReviews.length) {
+        list.innerHTML = '<p class="text-xs text-slate-500 text-center py-6">No reviews in the sheet yet.</p>';
+        return;
+      }
+      list.innerHTML = sheetReviews.map((r, i) => `
+        <div class="flex items-start justify-between gap-2 p-2.5 rounded-xl border border-slate-200">
+          <div class="min-w-0">
+            <p class="text-xs font-bold text-slate-800 truncate">${esc(r.name)} <span class="text-[9px] font-semibold text-slate-500">(${esc(r.role)})</span></p>
+            <p class="text-[10px] text-slate-500">${esc(r.batch)}${r.date ? ' • ' + esc(r.date) : ''} • ${'★'.repeat(r.rating || 5)}</p>
+            <p class="text-[11px] text-slate-600 mt-1 line-clamp-3">${esc(r.comment)}</p>
+          </div>
+          <button onclick="adminDeleteReview(${i})" ${r.row ? '' : 'disabled'} class="shrink-0 w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center active:scale-95 disabled:opacity-40" aria-label="Delete review">
+            <i class="fa-solid fa-trash text-xs"></i>
+          </button>
+        </div>`).join('');
+    }
+
+    async function adminDeleteReview(i) {
+      const r = sheetReviews[i];
+      if (!r || !r.row || adminBusy) return;
+      if (!confirm(`Delete the review by ${r.name}?`)) return;
+      adminBusy = true;
+      try {
+        const data = await apiPost({ action: 'deleteReview', row: r.row, ts: r.ts }, true);
+        if (!data.ok) throw new Error(data.error || 'Delete failed');
+        showToast('Review deleted.');
+      } catch (e) {
+        showToast(e.message || 'Could not delete review.');
+      }
+      await loadReviewsFromSheet();   // re-sync row numbers
+      renderAdminReviews();
+      adminBusy = false;
+    }
+
+    function renderAdminPhotos() {
+      const grid = document.getElementById('adminPhotosGrid');
+      if (!galleryImages.length) {
+        grid.innerHTML = '<p class="col-span-3 text-xs text-slate-500 text-center py-4">No photos in the Drive folder yet.</p>';
+        return;
+      }
+      grid.innerHTML = galleryImages.map(img => `
+        <div class="relative aspect-square rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
+          <img ${imgAttrs(img.id, 300, 'thumb')} alt="" loading="lazy" class="w-full h-full object-cover">
+          <button onclick="adminDeleteImage('${esc(img.id)}')" class="absolute top-1 right-1 w-7 h-7 rounded-lg bg-black/60 text-white flex items-center justify-center active:scale-95" aria-label="Delete photo">
+            <i class="fa-solid fa-trash text-[10px]"></i>
+          </button>
+        </div>`).join('');
+    }
+
+    // Resize + compress in the browser so uploads stay small and fast
+    function fileToJpegBase64(file, maxDim, quality) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+          const w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+          const c = document.createElement('canvas');
+          c.width = w; c.height = h;
+          const ctx = c.getContext('2d');
+          ctx.fillStyle = '#fff';
+          ctx.fillRect(0, 0, w, h);
+          ctx.drawImage(img, 0, 0, w, h);
+          URL.revokeObjectURL(url);
+          resolve(c.toDataURL('image/jpeg', quality).split(',')[1]);
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Unsupported image: ' + file.name)); };
+        img.src = url;
+      });
+    }
+
+    async function adminUpload() {
+      if (adminBusy) return;
+      const input = document.getElementById('adminFiles');
+      const files = Array.from(input.files || []);
+      const status = document.getElementById('adminUploadStatus');
+      const btn = document.getElementById('adminUploadBtn');
+      if (!files.length) { status.textContent = 'Choose at least one photo first.'; return; }
+      const caption = document.getElementById('adminCaption').value.trim();
+
+      adminBusy = true;
+      btn.disabled = true;
+      let done = 0, failed = 0;
+      for (const file of files) {
+        status.textContent = `Uploading ${done + failed + 1} of ${files.length}...`;
+        try {
+          const data64 = await fileToJpegBase64(file, 1600, 0.85);
+          const res = await apiPost({
+            action: 'uploadImage',
+            name: file.name.replace(/\.[^.]+$/, '') + '.jpg',
+            mime: 'image/jpeg',
+            data: data64,
+            caption
+          }, true);
+          if (!res.ok) throw new Error(res.error || 'Upload failed');
+          done++;
+        } catch (e) {
+          console.error(e);
+          failed++;
+          status.textContent = e.message || 'Upload failed';
+        }
+      }
+      input.value = '';
+      document.getElementById('adminCaption').value = '';
+      status.textContent = `${done} uploaded${failed ? `, ${failed} failed` : ''}.`;
+      btn.disabled = false;
+      adminBusy = false;
+      if (done) await loadGalleryFromDrive();
+    }
+
+    async function adminDeleteImage(id) {
+      if (adminBusy || !confirm('Remove this photo from the gallery?')) return;
+      adminBusy = true;
+      try {
+        const data = await apiPost({ action: 'deleteImage', id }, true);
+        if (!data.ok) throw new Error(data.error || 'Delete failed');
+        showToast('Photo removed.');
+      } catch (e) {
+        showToast(e.message || 'Could not remove photo.');
+      }
+      adminBusy = false;
+      await loadGalleryFromDrive();
+    }
+
+    // --- INITIALIZE ALL ON LOAD ---
+    function syncHeaderSpacer() {
+      const header = document.getElementById('siteHeader');
+      const spacer = document.getElementById('headerSpacer');
+      const nav = document.getElementById('mobileNavMenu');
+      if (header && spacer && nav && nav.classList.contains('hidden')) {
+        spacer.style.height = header.offsetHeight + 'px';
+      }
+    }
+    window.addEventListener('resize', syncHeaderSpacer);
+
+    window.addEventListener('load', () => {
+      try { loadGalleryFromDrive(); } catch (e) { console.error(e); }
+      try { loadReviewsFromSheet(); } catch (e) { console.error(e); }
+      syncHeaderSpacer();
+      renderReviewsCarousel();
+      setupReviewsSwipe();
+      startCenterAutoSwipe();
+      setupCenterTouchGestures();
+    });
+  </script>
+</body>
+</html>
