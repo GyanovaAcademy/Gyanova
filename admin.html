@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gyanova Academy - Admin Portal</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- jsPDF & AutoTable for client-side PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
   <style>
     :root {
       --primary: #2563eb;
@@ -63,20 +66,6 @@
       cursor: pointer;
     }
 
-    .mobile-logout-btn {
-      background: #fee2e2;
-      color: var(--danger);
-      border: none;
-      border-radius: 6px;
-      padding: 6px 12px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
     /* Sidebar Navigation */
     aside {
       width: 260px;
@@ -133,7 +122,21 @@
       font-weight: 600;
     }
 
-    /* Sidebar Logout Button */
+    .active-badge {
+      display: none;
+      margin-left: auto;
+      min-width: 22px;
+      height: 22px;
+      padding: 0 7px;
+      border-radius: 999px;
+      background: #f59e0b;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      align-items: center;
+      justify-content: center;
+    }
+
     .btn-logout {
       margin-top: auto;
       border: 1px solid #fecaca;
@@ -162,42 +165,121 @@
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
+    /* Card Header Bar */
     .header-bar {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
       gap: 12px;
     }
 
+    .header-bar h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    /* Button Group Layout in Header */
+    .header-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .top-action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .top-action-btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .btn-pdf {
+      background: #eff6ff;
+      color: var(--primary);
+      border-color: #bfdbfe;
+    }
+
+    .btn-pdf:hover {
+      background: #dbeafe;
+    }
+
+    /* Filter Grid */
     .filter-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
       gap: 16px;
       margin-bottom: 20px;
-      padding: 16px;
+      padding: 18px;
       background: #f8fafc;
       border-radius: var(--radius);
       border: 1px solid var(--border);
     }
 
-    .filter-grid label {
+    .filter-item {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 200px;
+      min-width: 175px;
+    }
+
+    .filter-item label {
       display: block;
-      font-size: 0.8rem;
-      font-weight: 600;
+      font-size: 0.75rem;
+      font-weight: 700;
       color: var(--text-muted);
       margin-bottom: 6px;
       text-transform: uppercase;
+      letter-spacing: 0.025em;
     }
 
-    .filter-grid select,
-    .filter-grid input {
+    .filter-item select,
+    .filter-item input {
       width: 100%;
+      height: 40px;
       padding: 8px 12px;
       border: 1px solid var(--border);
       border-radius: 6px;
       font-size: 0.9rem;
-      background: white;
+      background: #ffffff;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .filter-item select:focus,
+    .filter-item input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .date-dual-wrapper {
+      display: flex;
+      gap: 12px;
+      flex: 2 1 360px;
+      min-width: 320px;
+    }
+
+    .date-dual-wrapper .filter-sub-item {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 150px;
     }
 
     /* Tables */
@@ -227,16 +309,6 @@
       background: #fafafa;
     }
 
-    .badge-role {
-      display: inline-block;
-      padding: 2px 8px;
-      font-size: 0.75rem;
-      border-radius: 12px;
-      background: #f1f5f9;
-      color: var(--text-muted);
-      margin-left: 6px;
-    }
-
     .edit-input {
       width: 100%;
       padding: 6px 10px;
@@ -257,7 +329,7 @@
       transition: background 0.2s;
     }
 
-    .btn-edit { background: #f1f5f9; color: var(--text); }
+    .btn-edit { background: #f1f5f9; color: var(--text); margin-right: 4px; }
     .btn-edit:hover { background: #e2e8f0; }
     .btn-save { background: #16a34a; color: white; margin-right: 4px; }
     .btn-save:hover { background: #15803d; }
@@ -265,7 +337,7 @@
     .btn-delete { background: var(--danger); color: white; }
     .btn-delete:hover { background: var(--danger-hover); }
 
-    /* Modal Overlay (In-Page Popup) */
+    /* Modal Overlay */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -286,16 +358,10 @@
       max-width: 820px;
       height: 85vh;
       border-radius: 14px;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      animation: modalFadeIn 0.25s ease-out;
-    }
-
-    @keyframes modalFadeIn {
-      from { opacity: 0; transform: scale(0.96); }
-      to { opacity: 1; transform: scale(1); }
     }
 
     .modal-header {
@@ -373,22 +439,40 @@
       }
 
       main {
-        padding: 72px 14px 24px 14px;
+        padding: 72px 12px 24px 12px;
         width: 100%;
       }
 
       .view-card {
-        padding: 16px;
+        padding: 14px;
       }
 
-      .header-bar h2 {
-        font-size: 1.15rem;
+      .header-bar {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
-      .filter-grid {
-        grid-template-columns: 1fr;
-        padding: 12px;
-        gap: 12px;
+      .header-btn-group {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+      }
+
+      .top-action-btn {
+        width: 100%;
+        padding: 8px 6px;
+        font-size: 0.78rem;
+      }
+
+      .filter-item,
+      .date-dual-wrapper {
+        flex: 1 1 100%;
+        min-width: 100%;
+      }
+
+      .date-dual-wrapper {
+        flex-direction: column;
       }
 
       .table-container table, 
@@ -411,7 +495,6 @@
         border-radius: var(--radius);
         margin-bottom: 14px;
         background: #fff;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.03);
         padding: 8px 12px;
       }
 
@@ -429,7 +512,7 @@
         border-bottom: none;
         padding-top: 10px;
         justify-content: flex-end;
-        gap: 8px;
+        gap: 6px;
       }
 
       .table-container td::before {
@@ -443,26 +526,20 @@
         flex-shrink: 0;
       }
 
-      .edit-input {
-        text-align: left;
-        max-width: 65%;
-      }
-
       .modal-box {
         width: 95%;
         height: 92vh;
-        border-radius: 10px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Mobile Top Bar with Logout -->
+  <!-- Mobile Top Bar: Top edit button removed -->
   <header class="mobile-topbar">
     <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
     <div class="mobile-brand">Gyanova Admin</div>
-    <button class="mobile-logout-btn" onclick="logoutAdmin()">🚪 Exit</button>
+    <div style="width: 32px;"></div>
   </header>
 
   <!-- Backdrop for Mobile Sidebar -->
@@ -474,13 +551,12 @@
     
     <div class="nav-links">
       <button class="nav-btn" onclick="openModal('admission')">➕ Add Student</button>
-      <button class="nav-btn" onclick="openModal('attendance')">📝 Mark Attendance</button>
+      <button class="nav-btn" onclick="openModal('attendance')">📝 Mark Attendance <span class="active-badge" id="active-class-badge" title="Active classes">0</span></button>
       <button class="nav-btn active" id="btn-tab-students" onclick="switchTab('students')">👥 All Students</button>
       <button class="nav-btn" id="btn-tab-attendance" onclick="switchTab('attendance')">📅 Attendance Log</button>
       <button class="nav-btn" id="btn-tab-reviews" onclick="switchTab('reviews')">⭐ Manage Reviews</button>
     </div>
 
-    <!-- Pinned Desktop Logout Button -->
     <button class="nav-btn btn-logout" onclick="logoutAdmin()">🚪 Logout</button>
   </aside>
 
@@ -490,7 +566,9 @@
     <section id="view-students" class="view-card">
       <div class="header-bar">
         <h2>Enrolled Students</h2>
-        <button class="nav-btn" style="width: auto; padding: 6px 12px;" onclick="loadStudents()">🔄 Refresh</button>
+        <div class="header-btn-group">
+          <button class="top-action-btn" onclick="loadStudents()">🔄 Refresh</button>
+        </div>
       </div>
       <div class="table-container">
         <table>
@@ -515,32 +593,60 @@
     <section id="view-attendance" class="view-card" style="display: none;">
       <div class="header-bar">
         <h2>Attendance Records</h2>
-        <button class="nav-btn" style="width: auto; padding: 6px 12px;" onclick="loadAttendance()">🔄 Refresh</button>
-      </div>
-      <div class="filter-grid">
-        <div>
-          <label>Date</label>
-          <input type="date" id="filter-date" onchange="filterAttendance()" />
+        <!-- Organized Header Buttons including PDF Download -->
+        <div class="header-btn-group">
+          <button class="top-action-btn" onclick="showAllAttendance()">👁️ Show All</button>
+          <button class="top-action-btn btn-pdf" onclick="downloadAttendancePDF()">📥 Export PDF</button>
+          <button class="top-action-btn" onclick="loadAttendance()">🔄 Refresh</button>
         </div>
-        <div>
+      </div>
+
+      <!-- Clean Organised Attendance Filters -->
+      <div class="filter-grid">
+        <div class="filter-item">
+          <label>Date Filter Type</label>
+          <select id="filter-date-mode" onchange="onDateModeChange()">
+            <option value="today">Today</option>
+            <option value="single">Single Date</option>
+            <option value="range">Date Range</option>
+            <option value="last_month">Last Month</option>
+            
+          </select>
+        </div>
+
+        <div class="date-dual-wrapper" id="date-controls-wrapper">
+          <div class="filter-sub-item" id="start-date-container">
+            <label id="date-label-start">Date</label>
+            <input type="date" id="filter-date-start" onchange="filterAttendance()" />
+          </div>
+          <div class="filter-sub-item" id="end-date-container" style="display: none;">
+            <label id="date-label-end">To Date</label>
+            <input type="date" id="filter-date-end" onchange="filterAttendance()" />
+          </div>
+        </div>
+
+        <div class="filter-item">
           <label>Class</label>
           <select id="filter-class" onchange="filterAttendance()">
             <option value="">All Classes</option>
           </select>
         </div>
-        <div>
+
+        <div class="filter-item">
           <label>Branch</label>
           <select id="filter-branch" onchange="filterAttendance()">
             <option value="">All Branches</option>
           </select>
         </div>
-        <div>
+
+        <div class="filter-item">
           <label>Teacher Name</label>
           <select id="filter-teacher" onchange="filterAttendance()">
             <option value="">All Teachers</option>
           </select>
         </div>
       </div>
+
       <div class="table-container">
         <table>
           <thead>
@@ -564,7 +670,9 @@
     <section id="view-reviews" class="view-card" style="display: none;">
       <div class="header-bar">
         <h2>Student & Parent Reviews</h2>
-        <button class="nav-btn" style="width: auto; padding: 6px 12px;" onclick="loadReviews()">🔄 Refresh</button>
+        <div class="header-btn-group">
+          <button class="top-action-btn" onclick="loadReviews()">🔄 Refresh</button>
+        </div>
       </div>
       <div class="table-container">
         <table>
@@ -599,29 +707,42 @@
   </div>
 
   <script>
-    // 1. Paste the EXECUTABLE (/exec) URLs here:[cite: 7]
-    const STUDENT_ATTENDANCE_API_URL = "https://script.google.com/macros/s/AKfycbyBYXEe1Fq95ia7QiySkcUdEeZsW-x6WnlCDXRIhCf3Md5MwqMw-02PHpjwJlZUzN0EHQ/exec"; //[cite: 7]
-    const REVIEWS_API_URL            = "https://script.google.com/macros/s/AKfycbxvRiTFn5RPpkZTxH6nGOiagBV9bn5PPOGcaO0H1ATSH4WA0cCR7y4_dEfHw9k2Cx2W/exec"; //[cite: 7]
+    const STUDENT_ATTENDANCE_API_URL = "https://script.google.com/macros/s/AKfycbyhU0A4O-WJ_5oziWuIDWQ29zJggjYUuLpmpiRVRcHM3xPB71QRefm7dRK6XDIzsgnmxg/exec";
+    const REVIEWS_API_URL            = "https://script.google.com/macros/s/AKfycbxvRiTFn5RPpkZTxH6nGOiagBV9bn5PPOGcaO0H1ATSH4WA0cCR7y4_dEfHw9k2Cx2W/exec";
 
     const URLS = {
-      admission: "https://docs.google.com/forms/d/e/1FAIpQLScHIVEfoBN66ZVFGb0w3rRLuMLRKpGclgfM6Xai6T6-yuALMw/viewform?embedded=true", //[cite: 7]
-      attendance: "https://gyanovaacademy.github.io/Attendance-Form/" //[cite: 7]
+      admission: "https://docs.google.com/forms/d/e/1FAIpQLScHIVEfoBN66ZVFGb0w3rRLuMLRKpGclgfM6Xai6T6-yuALMw/viewform?embedded=true",
+      attendance: "https://gyanovaacademy.github.io/Attendance-Form/"
     };
 
-    let cachedStudents = []; //[cite: 7]
-    let cachedAttendance = []; //[cite: 7]
+    // --- ACTIVE CLASS COUNT (sent by the Attendance Form) ---
+    const ACTIVE_COUNT_KEY = "gyanova_active_class_count";
+    function setActiveClassBadge(n) {
+      const badge = document.getElementById('active-class-badge');
+      if (!badge) return;
+      n = parseInt(n, 10) || 0;
+      badge.textContent = n;
+      badge.style.display = n > 0 ? 'inline-flex' : 'none';
+      try { localStorage.setItem(ACTIVE_COUNT_KEY, String(n)); } catch (e) {}
+    }
+    window.addEventListener('message', function (e) {
+      if (e.origin !== "https://gyanovaacademy.github.io") return;
+      if (e.data && e.data.type === 'activeClassCount') setActiveClassBadge(e.data.count);
+    });
+    try { setActiveClassBadge(localStorage.getItem(ACTIVE_COUNT_KEY) || 0); } catch (e) {}
 
-    // Logout Functionality
+    let cachedStudents = [];
+    let cachedAttendance = [];
+    let currentFilteredAttendance = [];
+
     function logoutAdmin() {
-      if (confirm("Are you sure you want to log out of the admin panel?")) {
-        // Clear any saved session data if applicable
+      if (confirm("Are you sure you want to leave this page?")) {
         sessionStorage.clear();
-        localStorage.removeItem('gyanova_admin_logged');
-        window.location.href = "index.html";
+        localStorage.clear();
+        window.location.replace("index.html");
       }
     }
 
-    // Mobile Sidebar Drawer Toggle
     function toggleSidebar(force) {
       const sidebar = document.getElementById('admin-sidebar');
       const overlay = document.getElementById('sidebar-overlay');
@@ -662,21 +783,72 @@
 
       if (tab === 'students') loadStudents();
       if (tab === 'attendance') {
-        setTodayDateFilter();
+        onDateModeChange();
         loadAttendance();
       }
       if (tab === 'reviews') loadReviews();
     }
 
-    function setTodayDateFilter() {
-      const dateInput = document.getElementById('filter-date');
-      if (!dateInput.value) {
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const dd = String(today.getDate()).padStart(2, '0');
-        dateInput.value = `${yyyy}-${mm}-${dd}`;
+    // --- DATE RANGE & FILTER MODES ---
+    function onDateModeChange() {
+      const mode = document.getElementById('filter-date-mode').value;
+      const startContainer = document.getElementById('start-date-container');
+      const endContainer = document.getElementById('end-date-container');
+      const startInput = document.getElementById('filter-date-start');
+      const endInput = document.getElementById('filter-date-end');
+      const startLabel = document.getElementById('date-label-start');
+      const dateWrapper = document.getElementById('date-controls-wrapper');
+
+      const now = new Date();
+      const formatDate = (d) => {
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${y}-${m}-${day}`;
+      };
+
+      if (mode === 'all') {
+        dateWrapper.style.display = 'none';
+        startInput.value = "";
+        endInput.value = "";
+      } else {
+        dateWrapper.style.display = 'flex';
+
+        if (mode === 'today') {
+          startContainer.style.display = 'flex';
+          endContainer.style.display = 'none';
+          startLabel.innerText = "Date";
+          startInput.value = formatDate(now);
+          endInput.value = "";
+        } else if (mode === 'single') {
+          startContainer.style.display = 'flex';
+          endContainer.style.display = 'none';
+          startLabel.innerText = "Specific Date";
+          endInput.value = "";
+        } else if (mode === 'range') {
+          startContainer.style.display = 'flex';
+          endContainer.style.display = 'flex';
+          startLabel.innerText = "From Date";
+          if (!startInput.value) startInput.value = formatDate(now);
+          if (!endInput.value) endInput.value = formatDate(now);
+        } else if (mode === 'last_month') {
+          startContainer.style.display = 'flex';
+          endContainer.style.display = 'flex';
+          startLabel.innerText = "From (Last Month)";
+
+          const firstDayLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+          const lastDayLastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+          startInput.value = formatDate(firstDayLastMonth);
+          endInput.value = formatDate(lastDayLastMonth);
+        }
       }
+
+      filterAttendance();
+    }
+
+    function showAllAttendance() {
+      document.getElementById('filter-date-mode').value = 'all';
+      onDateModeChange();
     }
 
     // --- STUDENTS ---
@@ -709,6 +881,7 @@
           <td data-label="Contact Number">${student.phone}</td>
           <td data-label="Action">
             <button class="btn-action btn-edit" onclick="enableStudentEdit(${student.rowIndex})">✏️ Edit</button>
+            <button class="btn-action btn-delete" onclick="deleteStudent(${student.rowIndex})">🗑️ Delete</button>
           </td>
         </tr>
       `).join('');
@@ -774,7 +947,29 @@
       }
     }
 
-    // --- ATTENDANCE (Case-Insensitive) ---
+    async function deleteStudent(rowIndex) {
+      const student = cachedStudents.find(s => s.rowIndex === rowIndex);
+      const name = student ? student.name : 'this student';
+      if (!confirm(`Are you sure you want to delete ${name}? This will remove the record from the Google Sheet.`)) {
+        return;
+      }
+
+      try {
+        const res = await fetch(`${STUDENT_ATTENDANCE_API_URL}?action=deleteStudent&rowIndex=${rowIndex}`);
+        const result = await res.json();
+
+        if (result.ok) {
+          cachedStudents = cachedStudents.filter(s => s.rowIndex !== rowIndex);
+          renderStudentsTable();
+        } else {
+          alert('Failed to delete student: ' + (result.error || 'Server error'));
+        }
+      } catch (err) {
+        alert('Network error while deleting student.');
+      }
+    }
+
+    // --- ATTENDANCE ---
     async function loadAttendance() {
       const tbody = document.getElementById('attendance-body');
       tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Fetching attendance records...</td></tr>`;
@@ -795,9 +990,7 @@
           const raw = String(item[field] || '').trim();
           if (raw) {
             const lower = raw.toLowerCase();
-            if (!map.has(lower)) {
-              map.set(lower, raw);
-            }
+            if (!map.has(lower)) map.set(lower, raw);
           }
         });
         return Array.from(map.values()).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
@@ -816,19 +1009,51 @@
       teacherSel.innerHTML = `<option value="">All Teachers</option>`  + teachers.map(t => `<option value="${t.toLowerCase()}">${t}</option>`).join('');
     }
 
+    function parseItemDate(dateStr) {
+      if (!dateStr) return null;
+      if (dateStr.includes('-')) {
+        return dateStr.substring(0, 10);
+      }
+      if (dateStr.includes('/')) {
+        const parts = dateStr.split('/');
+        if (parts.length === 3) {
+          const d = parts[0].padStart(2, '0');
+          const m = parts[1].padStart(2, '0');
+          const y = parts[2].substring(0, 4);
+          return `${y}-${m}-${d}`;
+        }
+      }
+      return dateStr;
+    }
+
     function filterAttendance() {
-      const dateVal    = (document.getElementById('filter-date').value || '').trim();
+      const mode       = document.getElementById('filter-date-mode').value;
+      const startDate  = (document.getElementById('filter-date-start').value || '').trim();
+      const endDate    = (document.getElementById('filter-date-end').value || '').trim();
       const classVal   = (document.getElementById('filter-class').value || '').trim().toLowerCase();
       const branchVal  = (document.getElementById('filter-branch').value || '').trim().toLowerCase();
       const teacherVal = (document.getElementById('filter-teacher').value || '').trim().toLowerCase();
 
-      const filtered = cachedAttendance.filter(item => {
-        const itemDate    = String(item.isoDate || item.date || '').toLowerCase();
+      currentFilteredAttendance = cachedAttendance.filter(item => {
+        const rawDate = String(item.isoDate || item.date || '');
+        const itemDateStr = parseItemDate(rawDate);
         const itemClass   = String(item.class || '').toLowerCase().trim();
         const itemBranch  = String(item.branch || '').toLowerCase().trim();
         const itemTeacher = String(item.teacher || '').toLowerCase().trim();
 
-        const matchesDate    = !dateVal || itemDate.includes(dateVal);
+        let matchesDate = true;
+        if (mode === 'all') {
+          matchesDate = true;
+        } else if (mode === 'single' || mode === 'today') {
+          matchesDate = !startDate || rawDate.includes(startDate) || (itemDateStr && itemDateStr === startDate);
+        } else if (mode === 'range' || mode === 'last_month') {
+          if (startDate && endDate && itemDateStr) {
+            matchesDate = itemDateStr >= startDate && itemDateStr <= endDate;
+          } else if (startDate && itemDateStr) {
+            matchesDate = itemDateStr >= startDate;
+          }
+        }
+
         const matchesClass   = !classVal || itemClass === classVal;
         const matchesBranch  = !branchVal || itemBranch === branchVal;
         const matchesTeacher = !teacherVal || itemTeacher === teacherVal;
@@ -837,12 +1062,12 @@
       });
 
       const tbody = document.getElementById('attendance-body');
-      if (filtered.length === 0) {
+      if (currentFilteredAttendance.length === 0) {
         tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color: var(--text-muted);">No records found for the selected filter.</td></tr>`;
         return;
       }
 
-      tbody.innerHTML = filtered.map(row => `
+      tbody.innerHTML = currentFilteredAttendance.map(row => `
         <tr>
           <td data-label="Date">${row.date}</td>
           <td data-label="Student Name"><strong>${row.name}</strong></td>
@@ -852,6 +1077,66 @@
           <td data-label="Status"><span style="color: ${String(row.status).toLowerCase().includes('closed') ? '#dc2626' : '#16a34a'}; font-weight:600;">${row.status}</span></td>
         </tr>
       `).join('');
+    }
+
+    // --- PDF EXPORT FUNCTION (Filtered Attendance) ---
+    function downloadAttendancePDF() {
+      if (!currentFilteredAttendance || currentFilteredAttendance.length === 0) {
+        alert('No records available to export.');
+        return;
+      }
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'a4' });
+
+      // Title & Header Information
+      doc.setFontSize(16);
+      doc.setTextColor(37, 99, 235);
+      doc.text("Gyanova Academy - Attendance Report", 40, 45);
+
+      doc.setFontSize(9);
+      doc.setTextColor(100, 116, 139);
+
+      const filterMode = document.getElementById('filter-date-mode').value;
+      const classVal   = document.getElementById('filter-class').options[document.getElementById('filter-class').selectedIndex].text;
+      const branchVal  = document.getElementById('filter-branch').options[document.getElementById('filter-branch').selectedIndex].text;
+      const teacherVal = document.getElementById('filter-teacher').options[document.getElementById('filter-teacher').selectedIndex].text;
+
+      let filterSummary = `Filter: ${filterMode.toUpperCase()} | Class: ${classVal} | Branch: ${branchVal} | Teacher: ${teacherVal}`;
+      doc.text(filterSummary, 40, 62);
+      doc.text(`Generated: ${new Date().toLocaleString()}`, 40, 75);
+
+      // Format table body from current filtered array
+      const tableRows = currentFilteredAttendance.map((item, index) => [
+        index + 1,
+        item.date || '',
+        item.name || '',
+        item.class || '',
+        item.branch || '',
+        item.teacher || '',
+        item.status || ''
+      ]);
+
+      doc.autoTable({
+        startY: 90,
+        head: [['#', 'Date', 'Student Name', 'Class', 'Branch', 'Teacher', 'Status']],
+        body: tableRows,
+        theme: 'striped',
+        headStyles: {
+          fillColor: [37, 99, 235],
+          textColor: 255,
+          fontStyle: 'bold'
+        },
+        styles: {
+          fontSize: 8.5,
+          cellPadding: 6
+        },
+        alternateRowStyles: {
+          fillColor: [248, 250, 252]
+        }
+      });
+
+      doc.save(`Attendance_Report_${Date.now()}.pdf`);
     }
 
     // --- REVIEWS ---
@@ -897,7 +1182,7 @@
     }
 
     window.onload = () => {
-      setTodayDateFilter();
+      onDateModeChange();
       loadStudents();
     };
   </script>
