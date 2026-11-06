@@ -192,9 +192,9 @@
         </div>
 
         <!-- Typewriter Slogan in Bengali wrapped in quotation marks -->
-        <div class="min-h-[32px] flex items-center justify-center">
+    <div class="min-h-[32px] flex items-center justify-center">
           <p class="font-bengali text-lg sm:text-xl font-bold text-amber-200/95 tracking-wide leading-normal">
-            <span>“</span><span id="bengaliTypewriter"></span><span id="typewriterCursor" class="typewriter-cursor"></span><span id="closingQuote" class="opacity-0 transition-opacity duration-300">”</span>
+            <span id="bengaliTypewriter"></span><span id="typewriterCursor" class="typewriter-cursor"></span>
           </p>
         </div>
 
@@ -335,7 +335,7 @@
             <span class="inline-block px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wide bg-blue-100 text-brand-royal rounded-md">
               Secondary Foundation
             </span>
-            <span class="text-[10px] font-bold text-slate-400">WBBSE Curriculum</span>
+            <span class="text-[10px] font-bold text-slate-400">WBBSE Board</span>
           </div>
           <h3 class="text-xl font-black text-slate-900 leading-tight">
             CLASSES <span class="text-brand-royal text-2xl font-extrabold">5 to 10</span>
@@ -350,9 +350,12 @@
               <span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-900 text-[11px] font-semibold border border-blue-100">English</span>
               <span class="px-2 py-0.5 rounded-md bg-amber-50 text-amber-900 text-[11px] font-bold border border-amber-200">Mathematics</span>
               <span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-900 text-[11px] font-semibold border border-blue-100">Physical Science</span>
-              <span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-900 text-[11px] font-semibold border border-blue-100">Life Science</span>
+              <span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-900 text-[11px] font-semibold border border-blue-100">Life Science</span>	
               <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold">History</span>
               <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold">Geography</span>
+              <span class="px-2 py-0.5 rounded-md bg-amber-50 text-amber-900 text-[11px] font-bold border border-amber-200">Computer</span>
+              <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold">Hindi</span>
+              <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold">Sanskrit</span>
             </div>
           </div>
           <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">
@@ -389,9 +392,7 @@
               <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold">History</span>
               <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold">Philosophy</span>
               <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold">Education</span>
-              <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-900 text-[11px] font-semibold border border-emerald-100">Accountancy</span>
-              <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-900 text-[11px] font-semibold border border-emerald-100">Business Studies</span>
-              <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-900 text-[11px] font-semibold border border-emerald-100">Economics</span>
+              
             </div>
           </div>
           <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">
@@ -596,16 +597,12 @@
     <!-- Rating Summary Badge -->
     <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-200/80 mb-3 flex items-center justify-between">
       <div class="flex items-center gap-2.5">
-        <div class="text-2xl font-black text-slate-900 leading-none">4.9</div>
+        <div id="ratingAvg" class="text-2xl font-black text-slate-900 leading-none">–</div>
         <div>
-          <div class="flex text-amber-400 text-xs">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star-half-stroke"></i>
+          <div id="ratingStars" class="flex text-amber-400 text-xs" aria-label="Average rating">
+            <i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
           </div>
-          <span class="text-[10px] text-slate-500 font-medium">Over 150+ Happy Students & Parents</span>
+          <span id="ratingCount" class="text-[10px] text-slate-500 font-medium">Loading reviews…</span>
         </div>
       </div>
       <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-lg border border-emerald-200">
@@ -715,7 +712,7 @@
                 <span class="text-xs text-slate-600 font-medium leading-tight">
                   View on Maps
                 </span>
-                <a href="https://maps.google.com/?cid=7984029313011556810&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" 
+                <a href="https://maps.app.goo.gl/eUfKoWCEZxB9qgnC7?g_st=aw" 
                    target="_blank" 
                    rel="noopener noreferrer"
                    class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#0d346b] to-[#1d4ed8] hover:from-[#091c36] hover:to-[#1e40af] text-white font-bold text-xs shadow-md shadow-blue-900/20 active:scale-95 transition shrink-0">
@@ -752,7 +749,7 @@
                 <span class="text-xs text-slate-600 font-medium leading-tight">
                   View on Maps
                 </span>
-                <a href="https://maps.google.com/?cid=11351236493843373876&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" 
+                <a href="https://maps.app.goo.gl/KzSvvwYQ4JpyUEwK6?g_st=aw" 
                    target="_blank" 
                    rel="noopener noreferrer"
                    class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#0d346b] to-[#1d4ed8] hover:from-[#091c36] hover:to-[#1e40af] text-white font-bold text-xs shadow-md shadow-blue-900/20 active:scale-95 transition shrink-0">
@@ -856,14 +853,14 @@
         <div>
           <label class="block text-[11px] font-bold text-slate-700 mb-1">Class / Stream</label>
           <select id="reviewerClass" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal bg-white">
-            <option value="Class 10 (Madhyamik Batch)">Class 10 (Madhyamik Batch)</option>
-            <option value="Class 9 (Secondary)">Class 9 (Secondary)</option>
-            <option value="Class 8 (Foundation)">Class 8 (Foundation)</option>
-            <option value="Class 7 (Foundation)">Class 7 (Foundation)</option>
-            <option value="Class 6 (Foundation)">Class 6 (Foundation)</option>
-            <option value="Class 5 (Primary)">Class 5 (Primary)</option>
-            <option value="Class 11 (Arts / Commerce)">Class 11 (Arts / Commerce)</option>
-            <option value="Class 12 (Arts / Commerce)">Class 12 (Arts / Commerce)</option>
+            <option value="Class 10 (Madhyamik Batch)">Class 5 </option>
+            <option value="Class 9 (Secondary)">Class 6 </option>
+            <option value="Class 8 (Foundation)">Class 7</option>
+            <option value="Class 7 (Foundation)">Class 8</option>
+            <option value="Class 6 (Foundation)">Class 9</option>
+            <option value="Class 5 (Primary)">Class 10 </option>
+            <option value="Class 11 (Arts / Commerce)">Class 11</option>
+            <option value="Class 12 (Arts / Commerce)">Class 12</option>
           </select>
         </div>
 
@@ -883,7 +880,7 @@
           <div class="flex items-center justify-between mb-1">
             <label class="block text-[11px] font-bold text-slate-700">Review Feedback</label>
           </div>
-          <textarea id="reviewerComment" required minlength="30" rows="3" placeholder="Share your experience regarding teachers, mock tests, or doubt clearing (minimum 30 characters)..." class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal"></textarea>
+         <textarea id="reviewerComment" required rows="3" placeholder="Share your experience..." class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal"></textarea>
         </div>
 
         <button type="submit" class="w-full py-2.5 bg-brand-navy hover:bg-slate-900 text-white rounded-xl text-xs font-bold active:scale-98 transition shadow">
@@ -968,7 +965,7 @@
       <form onsubmit="handleInquirySubmit(event)" class="mt-4 space-y-3">
         <div>
           <label class="block text-[11px] font-bold text-slate-700 mb-1">Student / Guardian Name</label>
-          <input type="text" id="inqName" required placeholder="Enter full name" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal">
+          <b><input type="text" id="inqName" required placeholder="Enter full name" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal"></b>
         </div>
 
         <!-- Interactive Target Class / Program Dropdown with Concise Clean Typography -->
@@ -986,7 +983,7 @@
 
         <div>
           <label class="block text-[11px] font-bold text-slate-700 mb-1">Message or Query (Optional)</label>
-          <textarea id="inqMessage" rows="2" placeholder="Fee details, batch timing, etc." class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal"></textarea>
+          <b><textarea id="inqMessage" rows="2" placeholder="Fee details, batch timing, etc." class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-royal"></textarea> <b>
         </div>
 
         <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-md shadow-emerald-600/30 active:scale-98 transition">
@@ -1008,7 +1005,7 @@
   <script>
     // --- 1. ULTRA-SMOOTH WELCOME & INTRO TRANSITIONS ---
     let introSkipped = false;
-    const sloganBengali = "যা বিদ্যা সা বিমুক্তয়ে";
+    const sloganBengali = "সা  বিদ্যা যা বিমুক্তয়ে";
 
     window.addEventListener('DOMContentLoaded', () => {
       const phaseWelcome = document.getElementById('phaseWelcome');
@@ -1228,10 +1225,11 @@
     // --- 4. REVIEWS SYSTEM (3 PER SCREEN WITH TOUCH/DRAG SWIPE & BUBBLES) ---
     // ====== GOOGLE SHEET REVIEWS ======
     // Paste your Apps Script Web App URL (ends with /exec) below:
-    const REVIEWS_API = 'https://script.google.com/macros/s/AKfycbznnymTtqmPMm4xhyH81hmTB5U5ixgJDkwDr7nNZIHrIvcOUWTGNCdJKKYb53YJB9E/exec';
+    const REVIEWS_API = 'https://script.google.com/macros/s/AKfycbyWZGx5Ti4tDHVZsWLnCvfYYDfG7cxn6ZmD9iuBJkfzx-DNI2nU_TACkzvJ-TmysAKk/exec';
 
     let sheetReviews = [];   // live reviews from Google Sheet (newest first)
     let reviewsState = 'loading';   // loading | ready | error | off
+    let reviewsErrorMsg = '';
 
     function esc(s) {
       return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1264,24 +1262,80 @@
       };
     }
 
-    async function loadReviewsFromSheet() {
+    let reviewStats = null;   // {count, sum} for ALL reviews (server side, not limited to the 200 sent)
+    let reviewsSig = '';
+
+    function computeRatingStats() {
+      const list = getAllReviews();
+      let count = list.length;
+      let sum = list.reduce((t, r) => t + (Number(r.rating) || 0), 0);
+      if (reviewStats && reviewStats.count > count) { count = reviewStats.count; sum = reviewStats.sum; }
+      return { count: count, avg: count ? sum / count : 0 };
+    }
+
+    // 5 stars: full / half / empty according to the average
+    function starsHTML(avg) {
+      const r = Math.round(avg * 2) / 2;   // nearest 0.5
+      let h = '';
+      for (let i = 1; i <= 5; i++) {
+        if (r >= i) h += '<i class="fa-solid fa-star"></i>';
+        else if (r >= i - 0.5) h += '<i class="fa-solid fa-star-half-stroke"></i>';
+        else h += '<i class="fa-regular fa-star"></i>';
+      }
+      return h;
+    }
+
+    function updateRatingSummary() {
+      const avgEl = document.getElementById('ratingAvg');
+      const starsEl = document.getElementById('ratingStars');
+      const cntEl = document.getElementById('ratingCount');
+      if (!avgEl || !starsEl || !cntEl) return;
+      const st = computeRatingStats();
+      if (!st.count) {
+        avgEl.textContent = '–';
+        starsEl.innerHTML = starsHTML(0);
+        cntEl.textContent = reviewsState === 'loading' ? 'Loading reviews…'
+          : reviewsState === 'ready' ? 'No reviews yet' : 'Ratings unavailable';
+        return;
+      }
+      avgEl.textContent = st.avg.toFixed(1);
+      starsEl.innerHTML = starsHTML(st.avg);
+      starsEl.setAttribute('aria-label', st.avg.toFixed(1) + ' out of 5 stars');
+      cntEl.textContent = `Based on ${st.count} ${st.count === 1 ? 'review' : 'reviews'} from Students & Parents`;
+    }
+
+    async function loadReviewsFromSheet(silent) {
       if (!REVIEWS_API || REVIEWS_API.startsWith('PASTE_')) {
         reviewsState = 'off';
         renderReviewsCarousel();
         return;
       }
       try {
-        const res = await fetch(REVIEWS_API);
+        const res = await fetch(apiUrl('action=reviews&t=' + Date.now()));
         const data = await res.json();
         if (!data.ok) throw new Error(data.error || 'Failed');
+        if (!Array.isArray(data.reviews)) throw new Error('This link answered with: ' + Object.keys(data).join(', '));
+        const sig = data.reviews.length + '|' + (data.stats ? data.stats.sum : '') + '|' + (data.reviews[0] ? data.reviews[0].ts : 0);
+        if (silent && sig === reviewsSig) return;   // nothing changed
+        reviewsSig = sig;
         sheetReviews = data.reviews.map(mapSheetReview);
+        reviewStats = data.stats ? { count: Number(data.stats.count) || 0, sum: Number(data.stats.sum) || 0 } : null;
         reviewsState = 'ready';
+        reviewsErrorMsg = '';
       } catch (err) {
+        if (silent) return;   // keep what is already on screen
         console.error('Could not load reviews', err);
         reviewsState = 'error';
+        reviewsErrorMsg = /failed to fetch|networkerror|load failed/i.test(String(err.message))
+          ? 'Could not reach the Apps Script. Check that the Web App access is set to "Anyone".'
+          : String(err.message || err);
       }
       renderReviewsCarousel();
     }
+
+    // Real-time: re-check the sheet every 45 s while the page is open (updates average, stars, count and cards)
+    setInterval(() => { if (!document.hidden) loadReviewsFromSheet(true); }, 45000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) loadReviewsFromSheet(true); });
 
     let currentReviewPage = 0;
     let totalReviewPages = 1;
@@ -1291,6 +1345,7 @@
       const track = document.getElementById('reviewsPagesTrack');
       const bubblesContainer = document.getElementById('reviewsBubbles');
       const paginationWrapper = document.getElementById('reviewsPaginationContainer');
+      updateRatingSummary();
       if (!track || !bubblesContainer) return;
 
       if (reviews.length === 0) {
@@ -1300,7 +1355,7 @@
           off: 'Reviews will appear here soon.',
           ready: 'No reviews yet. Be the first to share your experience!'
         };
-        track.innerHTML = `<div class="w-full shrink-0 px-0.5"><div class="bg-white rounded-2xl p-5 text-center text-xs text-slate-500 border border-slate-200/80">${msgs[reviewsState] || ''}</div></div>`;
+        track.innerHTML = `<div class="w-full shrink-0 px-0.5"><div class="bg-white rounded-2xl p-5 text-center text-xs text-slate-500 border border-slate-200/80">${msgs[reviewsState] || ''}${reviewsState === 'error' && reviewsErrorMsg ? `<span class="block mt-1 text-[10px] text-slate-400">${esc(reviewsErrorMsg)}</span>` : ''}</div></div>`;
         paginationWrapper.classList.add('hidden');
         currentReviewPage = 0;
         updateReviewTrackPosition();
@@ -1544,7 +1599,7 @@
       });
     }
 
-    let reviewSubmitting = false;
+let reviewSubmitting = false;
 
     async function submitReview(event) {
       event.preventDefault();
@@ -1557,8 +1612,8 @@
       }
 
       const comment = document.getElementById('reviewerComment').value.trim();
-      if (comment.length < 30) {
-        showToast('Please enter at least 30 characters in your review feedback!');
+      if (!comment) {
+        showToast('Please write your review feedback!');
         return;
       }
 
@@ -1578,18 +1633,38 @@
       btn.textContent = 'Submitting...';
 
       try {
-        // text/plain avoids a CORS preflight, which Apps Script does not support
+        const payload = {
+          action: 'addReview',
+          name: name,
+          class: cls,
+          rating: rating,
+          comment: comment,
+          feedback: comment,
+          review: comment,
+          role: role
+        };
+
         const res = await fetch(REVIEWS_API, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ name, class: cls, rating, feedback: comment, role })
+          body: JSON.stringify(payload)
         });
-        const data = await res.json();
-        if (!data.ok) throw new Error(data.error || 'Failed');
 
-        // show it immediately at the top, then sync with the sheet
+        const textResponse = await res.text();
+        let data;
+        try {
+          data = JSON.parse(textResponse);
+        } catch (e) {
+          data = { ok: textResponse.toLowerCase().includes('success') };
+        }
+
+        if (data.ok === false) {
+          throw new Error(data.error || 'Server rejected review submission');
+        }
+
         const now = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' });
         sheetReviews.unshift(mapSheetReview({ name, class: cls, rating, comment, role, date: now }));
+        if (reviewStats) { reviewStats.count++; reviewStats.sum += rating; }
 
         currentReviewPage = 0;
         renderReviewsCarousel();
@@ -1599,8 +1674,8 @@
         showToast('Thank you! Your review has been published.');
         loadReviewsFromSheet();
       } catch (err) {
-        console.error(err);
-        showToast('Could not submit review. Please try again.');
+        console.error('Review submit error:', err);
+        showToast('Error: ' + (err.message || 'Could not submit review'));
       } finally {
         reviewSubmitting = false;
         btn.disabled = false;
@@ -1777,6 +1852,7 @@
     let galleryGen = 0;
     let galleryState = 'loading';   // loading | ready | error | off
     let galleryErrorMsg = '';
+    let galleryInfo = '';
     const COLLAGE_WIDTHS = ['w-36', 'w-56', 'w-40', 'w-52', 'w-44'];
 
     function apiUrl(query) {
@@ -1787,36 +1863,83 @@
       return `https://lh3.googleusercontent.com/d/${encodeURIComponent(id)}=w${w}`;
     }
 
-    // Image loading chain: direct googleusercontent link -> Drive thumbnail -> sent by the script itself
+    // Image loading chain: direct Google link -> Drive thumbnail -> Drive "view" link -> sent by the script itself (works for private files)
+    let directFails = 0, directWins = 0;
+
     function imgAttrs(id, w, kind) {
-      return `src="${driveImg(id, w)}" data-id="${esc(id)}" data-w="${w}" data-kind="${kind}" data-step="0" referrerpolicy="no-referrer" onerror="imgFallback(this)"`;
+      return `src="${driveImg(id, w)}" data-id="${esc(id)}" data-w="${w}" data-kind="${kind}" data-step="0" referrerpolicy="no-referrer" decoding="async" onload="imgLoaded(this)" onerror="imgFallback(this)"`;
+    }
+
+    function imgLoaded(el) {
+      if (parseInt(el.dataset.step || '0', 10) < 3 && !String(el.src).startsWith('data:')) directWins++;
     }
 
     function imgFallback(el) {
       const id = el.dataset.id, w = el.dataset.w, kind = el.dataset.kind || 'thumb';
-      const step = parseInt(el.dataset.step || '0', 10);
-      el.dataset.step = step + 1;
-      if (step === 0) {
-        el.src = `https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w${w}`;
-      } else if (step === 1) {
-        loadImgViaScript(el, id, kind);
-      } else {
-        el.onerror = null;
-        el.style.opacity = '0';
+      let step = parseInt(el.dataset.step || '0', 10);
+      if (step < 3) directFails++;
+      // public links clearly do not work for this folder -> go straight to the script
+      if (step < 3 && directFails >= 3 && directWins === 0) step = 3;
+      else step = step + 1;
+      el.dataset.step = step;
+      const sid = encodeURIComponent(id);
+      if (step === 1) el.src = `https://drive.google.com/thumbnail?id=${sid}&sz=w${w}`;
+      else if (step === 2) el.src = `https://drive.google.com/uc?export=view&id=${sid}`;
+      else if (step === 3) {
+        if (kind === 'thumb') queueThumb(el, id); else loadImgViaScript(el, id, kind);
+      } else imgGiveUp(el);
+    }
+
+    function imgGiveUp(el) {
+      el.onerror = null;
+      el.style.opacity = '0';
+      if (el.dataset.kind === 'thumb' && el.parentElement && !el.parentElement.querySelector('.img-fail')) {
+        el.insertAdjacentHTML('afterend', '<span class="img-fail absolute inset-0 flex items-center justify-center text-center px-2 text-[10px] font-semibold text-slate-500">Photo unavailable</span>');
       }
     }
 
+    // Single image through the script (used for the big lightbox photo)
     async function loadImgViaScript(el, id, kind) {
       try {
         const res = await fetch(apiUrl(`action=${kind}&id=${encodeURIComponent(id)}`));
         const data = await res.json();
-        if (data.ok) { el.src = data.data; return; }
+        if (data.ok) { el.onerror = null; el.src = data.data; return; }
         console.error('Image fallback failed:', data.error);
       } catch (err) {
         console.error('Image fallback failed', err);
       }
-      el.onerror = null;
-      el.style.opacity = '0';
+      imgGiveUp(el);
+    }
+
+    // Thumbnails through the script, 6 per request, max 2 requests at a time
+    const thumbQueue = [];
+    let thumbTimer = null, thumbActive = 0;
+    function queueThumb(el, id) {
+      thumbQueue.push({ el: el, id: id });
+      if (!thumbTimer) thumbTimer = setTimeout(flushThumbs, 150);
+    }
+    function flushThumbs() {
+      thumbTimer = null;
+      while (thumbQueue.length && thumbActive < 2) {
+        const batch = thumbQueue.splice(0, 6);
+        thumbActive++;
+        fetchThumbBatch(batch).finally(() => { thumbActive--; if (thumbQueue.length) flushThumbs(); });
+      }
+    }
+    async function fetchThumbBatch(batch) {
+      try {
+        const ids = Array.from(new Set(batch.map(b => b.id)));
+        const res = await fetch(apiUrl('action=thumbs&ids=' + encodeURIComponent(ids.join(','))));
+        const data = await res.json();
+        if (!data.ok || !data.thumbs) throw new Error(data.error || 'Old script version (no "thumbs" action)');
+        batch.forEach(b => {
+          const u = data.thumbs[b.id];
+          if (u) { b.el.onerror = null; b.el.src = u; } else imgGiveUp(b.el);
+        });
+      } catch (err) {
+        console.error('Thumbnail batch failed, trying one by one', err);
+        await Promise.all(batch.map(b => loadImgViaScript(b.el, b.id, 'thumb')));
+      }
     }
 
     function prettyName(name) {
@@ -1829,7 +1952,7 @@
       return `
         <div onclick="handleGalleryClick(event, '${esc(img.id)}')"
              class="${w} h-36 shrink-0 rounded-2xl overflow-hidden shadow-sm border border-slate-200 bg-slate-200 relative group cursor-pointer active:scale-95 transition">
-          <img ${imgAttrs(img.id, 600, 'thumb')} alt="${esc(title)}" loading="lazy" class="w-full h-full object-cover">
+          <img ${imgAttrs(img.id, 600, 'thumb')} alt="${esc(title)}" class="w-full h-full object-cover">
           ${img.caption ? `<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition p-2 flex items-end"><span class="text-[10px] text-white font-bold leading-tight">${esc(img.caption)}</span></div>` : ''}
         </div>`;
     }
@@ -1870,10 +1993,11 @@
           ready: 'No photos found in the Drive folder yet.'
         };
         msg.textContent = msgs[galleryState] || '';
-        if (galleryState === 'error' && galleryErrorMsg) {
+        const extra = galleryState === 'error' ? galleryErrorMsg : (galleryState === 'ready' ? galleryInfo : '');
+        if (extra) {
           const detail = document.createElement('span');
           detail.className = 'block mt-1 text-[10px] text-slate-400';
-          detail.textContent = galleryErrorMsg;
+          detail.textContent = extra;
           msg.appendChild(detail);
         }
         msg.classList.remove('hidden');
@@ -1910,22 +2034,31 @@
         return;
       }
       try {
-        const res = await fetch(apiUrl('action=images'));
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 60000);
+        const res = await fetch(apiUrl('action=images'), { signal: ctrl.signal });
+        clearTimeout(timer);
         const data = await res.json();
         if (!data.ok) throw new Error(data.error || 'Failed');
         if (!Array.isArray(data.images)) {
-          throw new Error('The Apps Script is an old version. Paste the latest Code.gs, then Deploy > Manage deployments > Edit > New version > Deploy.');
+          throw new Error('This link (…' + REVIEWS_API.slice(-12, -5) + ') is running OLD code; it answered with: ' + Object.keys(data).join(', ') + '. Make a New deployment of the latest Code.gs and paste its link into REVIEWS_API.');
         }
         galleryImages = data.images;
         galleryState = 'ready';
         galleryErrorMsg = '';
+        const inf = data.info;
+        galleryInfo = inf
+          ? `The script looked at ${inf.files} file(s) and ${inf.folders} sub-folder(s) and found no photos.` + (inf.skipped && inf.skipped.length ? ' Skipped: ' + inf.skipped.join(', ') : '') + (inf.errors && inf.errors.length ? ' Errors: ' + inf.errors.join(' | ') : '')
+          : '';
       } catch (err) {
         console.error('Could not load gallery', err);
         galleryImages = [];
         galleryState = 'error';
-        galleryErrorMsg = /failed to fetch|networkerror|load failed/i.test(String(err.message))
-          ? 'Could not reach the Apps Script. Check that the Web App access is set to "Anyone".'
-          : String(err.message || err);
+        galleryErrorMsg = err && err.name === 'AbortError'
+          ? 'Google Drive took too long to answer. Please reload the page.'
+          : /failed to fetch|networkerror|load failed/i.test(String(err.message))
+            ? 'Could not reach the Apps Script. Check that the Web App access is set to "Anyone".'
+            : String(err.message || err);
       }
       renderGallery();
       if (adminAuth) renderAdminPhotos();
