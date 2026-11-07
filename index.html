@@ -102,7 +102,7 @@
     }
 
     /* Ultra-smooth cubic-bezier transition classes for intro cross-dissolve */
-    html { scroll-padding-top: 72px; }   /* anchor links stop below the fixed header */
+    html { scroll-padding-top: 76px; }   /* anchor links stop below the fixed header */
 
     .intro-phase-layer {
       transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -146,26 +146,23 @@
   <!-- ==============================================
        1. CINEMATIC WELCOME & INTRO OVERLAY
   ============================================== -->
-  <div id="introSplash" class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-[#061224] via-[#091c36] to-[#040b17] text-white px-6 transition-opacity duration-1000 overflow-hidden select-none">
-    
-    <!-- Ambient Studio Light Cones & Floating Aura -->
-    <div class="absolute -top-32 -left-20 w-80 h-80 bg-blue-600/25 rounded-full blur-[100px] pointer-events-none animate-pulse-glow"></div>
-    <div class="absolute -bottom-32 -right-20 w-80 h-80 bg-brand-accentRed/30 rounded-full blur-[110px] pointer-events-none animate-pulse-glow"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+  <div id="introSplash" class="fixed inset-0 z-50 flex items-center justify-center text-white px-6 transition-opacity duration-[900ms] overflow-hidden select-none" style="background:#0c0e0f;">
 
+    <!-- Intro video (a.mp4) - edges feathered into the same near-black as the video so it blends seamlessly -->
+    <!-- soft colour wash matching the video's own warm-left / cool-right tint -->
+    <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(60% 40% at 8% 35%,rgba(60,52,34,.12),transparent 70%),radial-gradient(60% 40% at 96% 55%,rgba(26,40,70,.14),transparent 70%);"></div>
+    <div id="introVideoWrap" class="absolute pointer-events-none" style="left:50%;top:4%;transform:translateX(-50%);width:min(100vw,calc(74vh * 0.7341));aspect-ratio:624/850;transition:opacity .3s ease;">
+      <video id="introVideo" src="a.mp4" autoplay muted playsinline preload="auto" class="block w-full h-full"
+        style="-webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0.000) 0.0%,rgba(0,0,0,0.043) 3.0%,rgba(0,0,0,0.156) 6.0%,rgba(0,0,0,0.316) 9.0%,rgba(0,0,0,0.500) 12.0%,rgba(0,0,0,0.684) 15.0%,rgba(0,0,0,0.844) 18.0%,rgba(0,0,0,0.957) 21.0%,rgba(0,0,0,1.000) 24.0%,rgba(0,0,0,0.957) 79.0%,rgba(0,0,0,0.844) 82.0%,rgba(0,0,0,0.684) 85.0%,rgba(0,0,0,0.500) 88.0%,rgba(0,0,0,0.316) 91.0%,rgba(0,0,0,0.156) 94.0%,rgba(0,0,0,0.043) 97.0%,rgba(0,0,0,0.000) 100.0%),linear-gradient(to bottom,rgba(0,0,0,0.000) 0.0%,rgba(0,0,0,0.043) 2.5%,rgba(0,0,0,0.156) 5.0%,rgba(0,0,0,0.316) 7.5%,rgba(0,0,0,0.500) 10.0%,rgba(0,0,0,0.684) 12.5%,rgba(0,0,0,0.844) 15.0%,rgba(0,0,0,0.957) 17.5%,rgba(0,0,0,1.000) 20.0%,rgba(0,0,0,0.957) 82.5%,rgba(0,0,0,0.844) 85.0%,rgba(0,0,0,0.684) 87.5%,rgba(0,0,0,0.500) 90.0%,rgba(0,0,0,0.316) 92.5%,rgba(0,0,0,0.156) 95.0%,rgba(0,0,0,0.043) 97.5%,rgba(0,0,0,0.000) 100.0%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,rgba(0,0,0,0.000) 0.0%,rgba(0,0,0,0.043) 3.0%,rgba(0,0,0,0.156) 6.0%,rgba(0,0,0,0.316) 9.0%,rgba(0,0,0,0.500) 12.0%,rgba(0,0,0,0.684) 15.0%,rgba(0,0,0,0.844) 18.0%,rgba(0,0,0,0.957) 21.0%,rgba(0,0,0,1.000) 24.0%,rgba(0,0,0,0.957) 79.0%,rgba(0,0,0,0.844) 82.0%,rgba(0,0,0,0.684) 85.0%,rgba(0,0,0,0.500) 88.0%,rgba(0,0,0,0.316) 91.0%,rgba(0,0,0,0.156) 94.0%,rgba(0,0,0,0.043) 97.0%,rgba(0,0,0,0.000) 100.0%),linear-gradient(to bottom,rgba(0,0,0,0.000) 0.0%,rgba(0,0,0,0.043) 2.5%,rgba(0,0,0,0.156) 5.0%,rgba(0,0,0,0.316) 7.5%,rgba(0,0,0,0.500) 10.0%,rgba(0,0,0,0.684) 12.5%,rgba(0,0,0,0.844) 15.0%,rgba(0,0,0,0.957) 17.5%,rgba(0,0,0,1.000) 20.0%,rgba(0,0,0,0.957) 82.5%,rgba(0,0,0,0.844) 85.0%,rgba(0,0,0,0.684) 87.5%,rgba(0,0,0,0.500) 90.0%,rgba(0,0,0,0.316) 92.5%,rgba(0,0,0,0.156) 95.0%,rgba(0,0,0,0.043) 97.5%,rgba(0,0,0,0.000) 100.0%);mask-composite:intersect;"></video>
+    </div>
+    <div class="absolute inset-x-0 top-0 h-24 pointer-events-none" style="background:linear-gradient(to bottom,#0c0e0f 0%,rgba(12,14,15,0) 100%);"></div>
+    <div class="absolute inset-x-0 bottom-0 h-[45%] pointer-events-none" style="background:linear-gradient(to top,#0c0e0f 45%,rgba(12,14,15,0) 100%);"></div>
+    
     <!-- Content Showcase Container (Stacking layers for seamless cross-dissolve) -->
-    <div class="relative z-10 w-full max-w-sm flex items-center justify-center min-h-[300px]">
+    <div class="absolute z-10 inset-x-0 bottom-0 h-[28%] px-6 w-full max-w-sm mx-auto flex items-center justify-center">
 
       <!-- PHASE 1: Designer 'Welcome' Reveal -->
       <div id="phaseWelcome" class="intro-phase-layer absolute inset-0 flex flex-col items-center justify-center text-center opacity-0 scale-95 pointer-events-none">
-        <!-- Floating Crest Icon -->
-        <div class="relative mx-auto w-20 h-20 mb-5 flex items-center justify-center">
-          <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-brand-accentRed via-amber-500 to-amber-300 blur-md opacity-70 animate-pulse"></div>
-          <div class="relative w-full h-full rounded-2xl bg-gradient-to-tr from-brand-navy via-slate-900 to-brand-royal border border-amber-400/40 shadow-2xl flex items-center justify-center">
-            <i class="fa-solid fa-graduation-cap text-3xl text-amber-400"></i>
-          </div>
-        </div>
-
         <p class="text-xs font-semibold uppercase tracking-[0.4em] text-amber-400/90 mb-2">Greetings</p>
         <h2 class="text-4xl font-extrabold designer-welcome-text uppercase tracking-[0.3em] drop-shadow-lg">
           WELCOME
@@ -209,22 +206,14 @@
   <!-- ==============================================
        2. MOBILE HEADER & NAVIGATION (CALL ICON REMOVED)
   ============================================== -->
-  <header id="siteHeader" class="fixed top-0 left-1/2 -translate-x-1/2 z-40 bg-brand-navy/95 backdrop-blur-md border-b border-white/10 px-4 py-3 shadow-md w-full max-w-md">
+  <script>/* hide header logo until the intro logo lands on it */document.write("<style id=\"hlHide\">#headerLogo{opacity:0}</style>");</script>
+  <header id="siteHeader" class="fixed top-0 left-1/2 -translate-x-1/2 z-40 bg-brand-navy/95 backdrop-blur-md border-b border-white/10 px-4 py-2 shadow-md w-full max-w-md">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-2.5">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-accentRed to-amber-500 flex items-center justify-center text-white shadow-md shadow-brand-accentRed/30">
-          <i class="fa-solid fa-book-open-reader text-sm"></i>
-        </div>
-        <div>
-          <div class="flex items-baseline gap-1">
-            <span class="text-base font-extrabold text-white tracking-tight leading-none"></span>
-            <span class="text-[10px] font-bold text-brand-gold uppercase tracking-wider"></span>
-          </div>
-          <p class="text-[9px] text-slate-300 font-bengali"></p>
-        </div>
-      </div>
-      
-      <!-- Hamburger Menu Only (Call Icon removed as requested) -->
+        <img id="headerLogo" src="logo.png" alt="Logo" class="h-12 w-auto max-w-[60px] object-contain" style="transition:opacity .3s ease;" onerror="this.onerror=null;this.src='logo-fly.png'">
+    </div>
+
+    <!-- Hamburger Menu Only (Call Icon removed as requested) -->
       <div class="flex items-center gap-2">
         <button onclick="openAdmin()" class="p-2 w-8 h-8 rounded-full bg-amber-400/20 text-amber-300 flex items-center justify-center text-xs active:scale-95 transition" aria-label="Admin login" title="Admin">
           <i class="fa-solid fa-user-shield"></i>
@@ -255,7 +244,7 @@
     </nav>
   </header>
   <!-- keeps page content from hiding under the fixed header -->
-  <div id="headerSpacer" class="h-[61px]"></div>
+  <div id="headerSpacer" class="h-[65px]"></div>
 
   <!-- ==============================================
        3. HERO BANNER & ADMISSION ALERT
@@ -1032,12 +1021,19 @@
         
         // Trigger typewriter after brand fades in
         setTimeout(startBengaliTypewriter, 400);
-      }, 2200);
+      }, 2600);
 
-      // Step C: Auto-dismiss splash screen after typewriter and showcase
-      setTimeout(() => {
-        if (!introSkipped) skipIntro();
-      }, 6200);
+      // Step C: logo appears centre-screen, then flies to the top-left header slot
+      // preload the transparent logo cut from the video's last frame
+      new Image().src = 'logo-fly.png';
+      const introVideo = document.getElementById('introVideo');
+      if (introVideo) {
+        introVideo.addEventListener('ended', () => {
+          setTimeout(() => { if (!introSkipped) flyLogoToHeader(); }, 500);
+        });
+      }
+      // safety net if the video can't play / never ends
+      setTimeout(() => { if (!introSkipped && !window.__logoFlying) flyLogoToHeader(); }, 7500);
     });
 
     function startBengaliTypewriter() {
@@ -1065,12 +1061,80 @@
       }, 85);
     }
 
+    function revealHeaderLogo() {
+      const st = document.getElementById('hlHide');
+      if (st) st.remove();
+      const hl = document.getElementById('headerLogo');
+      if (hl) hl.style.opacity = '1';
+    }
+
+    // Logo position inside the video's last frame (video is 624x850)
+    const VIDEO_LOGO = { x: 140, y: 198, w: 354, h: 466 };
+
+    function flyLogoToHeader() {
+      if (window.__logoFlying || introSkipped) return;
+      const hl = document.getElementById('headerLogo');
+      const r = hl ? hl.getBoundingClientRect() : null;
+      if (!r || !r.width || !r.height) { skipIntro(); return; }
+      window.__logoFlying = true;
+
+      // where the logo sits on screen now (video is object-contain, centred in its box)
+      let st;
+      const v = document.getElementById('introVideo');
+      if (v && v.videoWidth) {
+        const vr = v.getBoundingClientRect();
+        const k = Math.min(vr.width / v.videoWidth, vr.height / v.videoHeight);
+        const offX = vr.left + (vr.width - v.videoWidth * k) / 2;
+        const offY = vr.top + (vr.height - v.videoHeight * k) / 2;
+        st = { l: offX + VIDEO_LOGO.x * k, t: offY + VIDEO_LOGO.y * k, w: VIDEO_LOGO.w * k, h: VIDEO_LOGO.h * k };
+      } else {
+        const h = Math.min(260, window.innerHeight * 0.3);
+        st = { l: (window.innerWidth - h * VIDEO_LOGO.w / VIDEO_LOGO.h) / 2, t: window.innerHeight * 0.22, w: h * VIDEO_LOGO.w / VIDEO_LOGO.h, h };
+      }
+
+      const fly = document.createElement('img');
+      fly.src = 'logo-fly.png';
+      fly.alt = '';
+      fly.style.cssText = 'position:fixed;z-index:60;left:' + st.l + 'px;top:' + st.t + 'px;width:' + st.w + 'px;height:' + st.h + 'px;' +
+        'object-fit:contain;pointer-events:none;transform-origin:center center;will-change:transform;backface-visibility:hidden;transform:translate3d(0,0,0) scale(1);';
+      document.body.appendChild(fly);
+
+      // move by centre-to-centre distance and shrink uniformly (GPU transform = smooth)
+      const dx = (r.left + r.width / 2) - (st.l + st.w / 2);
+      const dy = (r.top + r.height / 2) - (st.t + st.h / 2);
+      const sc = Math.min(r.width / st.w, r.height / st.h);
+
+      const go = () => {
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          // 1) the flying copy sits exactly on the video's logo -> hide the video underneath so no second logo is left behind
+          const wrap = document.getElementById('introVideoWrap');
+          if (wrap) wrap.style.opacity = '0';
+          if (v) { try { v.pause(); } catch (e) {} }
+          ['phaseWelcome', 'phaseBrand'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) { el.style.transition = 'opacity .35s ease'; el.style.opacity = '0'; }
+          });
+          // 2) the logo glides to the header corner
+          fly.style.transition = 'transform 1.3s cubic-bezier(.45,0,.2,1)';
+          fly.style.transform = 'translate3d(' + dx + 'px,' + dy + 'px,0) scale(' + sc + ')';
+          // 3) the dark welcome backdrop dissolves while the logo travels
+          setTimeout(skipIntro, 200);
+        }));
+      };
+      if (fly.complete) go(); else { fly.onload = go; fly.onerror = () => { fly.remove(); window.__logoFlying = false; skipIntro(); }; }
+
+      // land: fade the real header logo in, then drop the flying copy
+      setTimeout(() => { revealHeaderLogo(); }, 1650);
+      setTimeout(() => { fly.remove(); window.__logoFlying = false; }, 2000);
+    }
+
     function skipIntro() {
       introSkipped = true;
       const splash = document.getElementById('introSplash');
       if (splash) {
         splash.classList.add('opacity-0', 'pointer-events-none');
         setTimeout(() => splash.remove(), 1000);
+        if (!window.__logoFlying) revealHeaderLogo();
       }
     }
 
